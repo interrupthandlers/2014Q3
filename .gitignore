@@ -59,8 +59,8 @@
 *.synctex.gz
 *.orig
 
-*.pdf
-**/*.pdf
+#*.pdf
+#**/*.pdf
 
 ####### Temporary folders ####### 
 [Bb]in
