@@ -1,0 +1,94 @@
+%Report template by Christian Fischer Pedersen for IT-ONK
+%--------------------------------------------------------
+
+%Page layout
+%--------------------------------------------------------
+\documentclass[a4paper,10pt]{report}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+
+%Seperated files
+%--------------------------------------------------------
+\usepackage{subfiles}
+
+%Text typesetting
+%--------------------------------------------------------
+\usepackage{bookman}                  
+\usepackage[T1]{fontenc}              
+\usepackage[utf8]{inputenc}         
+\usepackage[english]{babel}        
+\usepackage[bf,small,raggedright,compact]{titlesec}
+\usepackage[parfill]{parskip}
+\usepackage{setspace}
+\setcounter{secnumdepth}{3}
+
+%Tables
+%----------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{multirow} 
+\usepackage{multicol} 
+\usepackage{booktabs}
+
+%Misc
+%----------------------------------------------------------
+\usepackage{cite}
+\usepackage{appendix}
+\usepackage{amssymb}
+\usepackage{url}
+
+%FixMe pakken viser små kommentarer, hvor der skal rettes
+%--------------------------------------------------
+%Brug med følgende: \fxnote{det her skal uddybes!} 
+%Se liste over alle fixMe's: \listoffixmes
+%Erstat 'draft' med 'final' for at fjerne alle kommentarer
+%--------------------------------------------------
+\usepackage[footnote,draft,english,silent,nomargin]{fixme}
+
+%Begin document
+%----------------------------------------------------------
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+{\LARGE \textbf{Meggit Decoder}}\\
+{\large \textbf{TIINCO Mini project}}\\
+
+\vspace{4cm}
+\textbf{Handed in March 20, 2014}\\~\\ \fxnote{Indtast dato for aflevering.}
+\begin{tabular}{ll}
+Ivan Grujic & 10454@iha.dk \\
+Lasse Brøsted Pedersen & 10769@iha.dk \\
+\end{tabular}
+\vfill
+\textbf{Electrical and Computer Engineering}\\
+\textbf{Aarhus University}\\
+\textbf{Finlandsgade 22, 8200 Aarhus N, Denmark}
+\end{center}
+\end{titlepage}
+
+\subfile{Abstract}
+
+\subfile{Introduction}
+
+\subfile{Subject}
+
+\subfile{Prototype}
+
+\subfile{Conclusion}
+
+\fxnote{tilføj eller fjern bibitems}
+\begin{thebibliography}{9}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+
+\bibitem{1989_graham_1}
+R.L. Graham, D.E. Knuth, and O. Patashnik, \emph{Concrete
+mathematics}, Addison-Wesley, Reading, MA, 1989.
+
+\bibitem{2003_simpson_1} H. Simpson, \emph{Proof of the Riemann
+Hypothesis},  preprint (2003), available at 
+\url{http://www.math.drofnats.edu/riemann.ps}.
+
+\end{thebibliography}
+
+\end{document}
