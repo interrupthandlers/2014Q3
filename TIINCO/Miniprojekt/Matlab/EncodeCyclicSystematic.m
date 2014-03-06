@@ -1,4 +1,6 @@
 function codeword = EncodeCyclicSystematic(generatorPoly, message)
+%based on example 3.2 in the book
+
 n = 15; %condition of the task
 k = length(message); %7 as per the conditions
 r = n - k; %no. of parity bits is 8

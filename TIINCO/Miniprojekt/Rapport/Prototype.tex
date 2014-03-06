@@ -3,6 +3,17 @@
 
 \chapter{Prototype: Title of your prototype}
 
+\begin{lstlisting}
+function y = myfun(aa, sigma, options)
+
+  sigma
+
+  y = aa .* pdf('logn', aa, -0.5*sigma^2, sigma)
+
+  %y = 1/(sigma.*sqrt(2.*pi)) .* exp((-((log(aa)+0.5*sigma.^2)).^2) ./ (2.*sigma.^2));
+end
+\end{lstlisting}
+
 
 
 
