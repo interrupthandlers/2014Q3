@@ -1,0 +1,886 @@
+Warning: Name is nonexistent or not a directory: C:\Users\51240\Dropbox\8. semester\Q3\Informationstheory and coding\TIINCO opgaver\pictures
+>> syms a;
+>> S = [a^8 a^7 a^4 a^2]
+ 
+S =
+ 
+[ a^8, a^7, a^4, a^2]
+ 
+>> X2t = [1 0 0 0 0]
+
+X2t =
+
+     1     0     0     0     0
+
+>> [qu re] = gfdeconv(X2t,S)
+Error using gfdeconv
+The input elements must be binary.
+ 
+>> [qu re] = gfdeconv(X2t,S,4)
+Error using gfdeconv
+The field parameter must be a positive prime integer.
+ 
+>> [qu re] = gfdeconv(X2t,S,2^4)
+Error using gfdeconv
+The field parameter must be a positive prime integer.
+ 
+>> [qu re] = gfdeconv(X2t,S,15)
+Error using gfdeconv
+The field parameter must be a positive prime integer.
+ 
+>> [qu re] = gfdeconv(X2t,S,2)
+Error using gfdeconv
+The input elements must be binary.
+ 
+>> [qu re] = gfdeconv(X2t,S,3)
+Error using gfdeconv
+The input elements must be between 0 and P-1.
+ 
+>> [qu re] = gfdeconv(X2t,S,5)
+Error using gfdeconv
+The input elements must be between 0 and P-1.
+ 
+>> [qu re] = gfdeconv(X2t,S,6)
+Error using gfdeconv
+The field parameter must be a positive prime integer.
+ 
+>> [qu re] = gfdeconv(X2t,S,)
+ [qu re] = gfdeconv(X2t,S,)
+                          |
+Error: Unbalanced or unexpected parenthesis or bracket.
+ 
+>> [qu re] = gfdeconv(X2t,S,5)
+Error using gfdeconv
+The input elements must be between 0 and P-1.
+ 
+>> [qu re] = gfdeconv(X2t,S,5)
+Error using gfdeconv
+The input elements must be between 0 and P-1.
+ 
+>> [qu re] = gfdeconv(X2t,S,5)
+Error using gfdeconv
+The input elements must be between 0 and P-1.
+ 
+>> [qu re] = gfdeconv(X2t,S,15)
+Error using gfdeconv
+The field parameter must be a positive prime integer.
+ 
+>> [qu re] = gfdeconv(X2t,S,17)
+Error using gfdeconv
+The input elements must be between 0 and P-1.
+ 
+>> S = [8 7 4 2]
+
+S =
+
+     8     7     4     2
+
+>> [qu re] = gfdeconv(X2t,S,17)
+
+qu =
+
+     0
+
+
+re =
+
+     1
+
+>> [qu re] = gfdeconv(X2t,S)
+Error using gfdeconv
+The input elements must be binary.
+ 
+>> [qu re] = gfdeconv(X2t,S,5)
+Error using gfdeconv
+The input elements must be between 0 and P-1.
+ 
+>> [qu re] = gfdeconv(X2t,S,11)
+
+qu =
+
+     0
+
+
+re =
+
+     1
+
+>> [qu re] = gfdeconv(X2t,S,13)
+
+qu =
+
+     0
+
+
+re =
+
+     1
+
+>> S = gf([8 7 4 2],4)
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           8           7           4           2
+
+>> [qu re] = gfdeconv(X2t,S)
+Error using gfdeconv
+The input elements must be binary.
+ 
+>> [qu re] = gfdeconv(X2t,S,5)
+Error using gfdeconv
+The input elements must be between 0 and P-1.
+ 
+>> [qu re] = gfdeconv(X2t,S,17)
+Error using gfdeconv
+The input elements must be between 0 and P-1.
+ 
+>> m = 4
+
+m =
+
+     4
+
+>> S = gf([8 7 4 2],4)
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           8           7           4           2
+
+>> X2t = gf([1 0 0 0 0],m)
+ 
+X2t = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           1           0           0           0           0
+
+>> [qu re] = gfdeconv(X2t,S,11)
+Error using gfdeconv
+The input elements must be between 0 and P-1.
+ 
+>> [qu re] = gfdeconv(X2t,S)
+Error using gfdeconv
+The input elements must be binary.
+ 
+>> C = conv(S,X2t)
+ 
+C = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           8           7           4           2           0           0           0           0
+
+>> S = gf([8 7 4 2],4)
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           8           7           4           2
+
+>> X2t = gf([1 0 0 0 0],m)
+ 
+X2t = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           1           0           0           0           0
+
+>> [qu re] = gfdeconv(X2t,S)
+Error using gfdeconv
+The input elements must be binary.
+ 
+>> [qu re] = deconv(X2t,S)
+ 
+qu = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          15           3
+
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0           0           1           6
+
+>> S
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           8           7           4           2
+
+>> X2t
+ 
+X2t = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           1           0           0           0           0
+
+>> S = gf([0 8 7 4 2],4)
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           8           7           4           2
+
+>> [qu re] = deconv(X2t,S)
+Error using gf/deconv (line 21)
+First element of A must be non-zero.
+ 
+>> S = gf([8 7 4 2],4)
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           8           7           4           2
+
+>> [qu re] = deconv(X2t,S)
+ 
+qu = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          15           3
+
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0           0           1           6
+
+>> S = gf([8 7 4 2],4)
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           8           7           4           2
+
+>> X2t = gf([1 0 0 0 0],m)
+ 
+X2t = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           1           0           0           0           0
+
+>> [qu re] = deconv(X2t,S)
+ 
+qu = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          15           3
+
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0           0           1           6
+
+>> [qu re] = deconv(S,X2t)
+ 
+qu = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0
+
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           8           7           4           2
+
+>> [qu re] = deconv(X2t,S)
+ 
+qu = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          15           3
+
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0           0           1           6
+
+>> help deconv
+ deconv Deconvolution and polynomial division.
+    [Q,R] = deconv(B,A) deconvolves vector A out of vector B.  The result
+    is returned in vector Q and the remainder in vector R such that
+    B = conv(A,Q) + R.
+ 
+    If A and B are vectors of polynomial coefficients, deconvolution
+    is equivalent to polynomial division.  The result of dividing B by
+    A is quotient Q and remainder R.
+ 
+    Class support for inputs B,A:
+       float: double, single
+ 
+    See also conv, residue.
+
+    Overloaded methods:
+       gf/deconv
+
+    Reference page in Help browser
+       doc deconv
+
+ deconv Deconvolution and polynomial division.
+    [Q,R] = deconv(B,A) deconvolves a Galois field vector A out
+    of a Galois field vector B. The result is returned in vector Q
+    and the remainder in vector R such that
+    B = conv(A,Q) + R.
+ 
+    If A and B are vectors of polynomial coefficients, deconvolution
+    is equivalent to polynomial division.  The result of dividing B by
+    A is quotient Q and remainder R.
+
+ deconv Deconvolution and polynomial division.
+    [Q,R] = deconv(B,A) deconvolves a Galois field vector A out
+    of a Galois field vector B. The result is returned in vector Q
+    and the remainder in vector R such that
+    B = conv(A,Q) + R.
+ 
+    If A and B are vectors of polynomial coefficients, deconvolution
+    is equivalent to polynomial division.  The result of dividing B by
+    A is quotient Q and remainder R.
+
+ deconv Deconvolution and polynomial division.
+    [Q,R] = deconv(B,A) deconvolves a Galois field vector A out
+    of a Galois field vector B. The result is returned in vector Q
+    and the remainder in vector R such that
+    B = conv(A,Q) + R.
+ 
+    If A and B are vectors of polynomial coefficients, deconvolution
+    is equivalent to polynomial division.  The result of dividing B by
+    A is quotient Q and remainder R.
+
+>> [qu re] = deconv(X2t,S)
+ 
+qu = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          15           3
+
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0           0           1           6
+
+>> a = ([0:7],3)
+ a = ([0:7],3)
+           |
+Error: Expression or statement is incorrect--possibly unbalanced (, {, or [.
+ 
+>> a = [0:7]
+
+a =
+
+     0     1     2     3     4     5     6     7
+
+>> gf8 = gf([0:7],3);
+>> gf8
+ 
+gf8 = GF(2^3) array. Primitive polynomial = D^3+D+1 (11 decimal)
+ 
+Array elements = 
+ 
+           0           1           2           3           4           5           6           7
+
+>> S = gf([0 8 7 4 2],4)
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           8           7           4           2
+
+>> X2t = gf([1 0 0 0 0],m)
+ 
+X2t = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           1           0           0           0           0
+
+>> S = gf([0 8 7 4 2],4)
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           8           7           4           2
+
+>> S = gf([8 7 4 2],4)
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           8           7           4           2
+
+>> S = gf([5 11 3 4],4)
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           5          11           3           4
+
+>> [qu re] = deconv(X2t,S)
+ 
+qu = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11          12
+
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0           3          13           5
+
+>> [qu re] = deconv(S,re)
+Error using gf/deconv (line 21)
+First element of A must be non-zero.
+ 
+>> S
+ 
+S = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           5          11           3           4
+
+>> re
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0           3          13           5
+
+>> r1 = gf([3 13 15],4)
+ 
+r1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           3          13          15
+
+>> [qu re] = deconv(S,re)
+Error using gf/deconv (line 21)
+First element of A must be non-zero.
+ 
+>> [qu re] = deconv(S,re)
+Error using gf/deconv (line 21)
+First element of A must be non-zero.
+ 
+>> re
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0           3          13           5
+
+>> [qu re] = deconv(S,r1)
+ 
+qu = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           3           5
+
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0          13           2
+
+>> r1 = gf([3 13 5],4)
+ 
+r1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           3          13           5
+
+>> [qu re] = deconv(S,r1)
+ 
+qu = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           3           5
+
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0           0           6
+
+>> q2 = gf([3 5],4)
+ 
+q2 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           3           5
+
+>> q1 = gf([11 10],4)
+ 
+q1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11          10
+
+>> q2 = gf([3 5],4)
+ 
+q2 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           3           5
+
+>> q1, q2
+ 
+q1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11          10
+
+ 
+q2 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           3           5
+
+>> ti1 = gf([11 10],4)
+ 
+ti1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11          10
+
+>> q2, ti1
+ 
+q2 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           3           5
+
+ 
+ti1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11          10
+
+>> conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          14          12           4
+
+>> 1 -conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          15          13           5
+
+>> 1 - conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          15          13           5
+
+>> conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          14          12           4
+
+>> 1 - conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          15          13           5
+
+>> q2
+ 
+q2 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           3           5
+
+>> ti1
+ 
+ti1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11          10
+
+>> ti1 = gf([11 0 10],4)
+ 
+ti1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11           0          10
+
+>> ti1
+ 
+ti1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11           0          10
+
+>> 1 - conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          15           0          12           5
+
+>> conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          14           1          13           4
+
+>> conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          14           1          13           4
+
+>> [qu re] = deconv(X2t,S)
+ 
+qu = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11          12
+
+ 
+re = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           0           0           3          13           5
+
+>> ti1
+ 
+ti1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11           0          10
+
+>> ti1 = gf([11 12],4)
+ 
+ti1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11          12
+
+>> conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          14           6           9
+
+>> 1 - conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          15           7           8
+
+>> conv(q2,ti1)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          14           6           9
+
+>> a15 = gf([1],4)
+ 
+a15 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           1
+
+>> a14 = gf([9],4)
+ 
+a14 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           9
+
+>> a14 + a15
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           8
+
+>> lambda = gf([3],4)
+ 
+lambda = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           3
+
+>> ti1
+ 
+ti1 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          11          12
+
+>> ti2 = gf([14 6 8],4)
+ 
+ti2 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          14           6           8
+
+>> sigma = conv(lambda, ti2)
+ 
+sigma = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           1          10          11
+
+>> roots(sigma)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           1
+          11
+
+>> help roots
+ roots  Find polynomial roots.
+    roots(C) computes the roots of the polynomial whose coefficients
+    are the elements of the vector C. If C has N+1 components,
+    the polynomial is C(1)*X^N + ... + C(N)*X + C(N+1).
+ 
+    Note:  Leading zeros in C are discarded first.  Then, leading relative
+    zeros are removed as well.  That is, if division by the leading
+    coefficient results in overflow, all coefficients up to the first
+    coefficient where overflow occurred are also discarded.  This process is
+    repeated until the leading coefficient is not a relative zero.
+ 
+    Class support for input c: 
+       float: double, single
+ 
+    See also poly, residue, fzero.
+
+    Overloaded methods:
+       gf/roots
+
+    Reference page in Help browser
+       doc roots
+
+ roots  Find polynomial roots in a Galois field.
+    roots(C) computes the roots of the polynomial whose coefficients
+    are the elements of the vector C. If C has N+1 components,
+    the polynomial is C(1)*X^N + ... + C(N)*X + C(N+1).
+
+>> roots(sigma)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           1
+          11
+
+>> a15 = gf([1],4)
+ 
+a15 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           1
+
+>> a14 = gf([9],4)
+ 
+a14 = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+           9
+
+>> conv(a14,15)
+ 
+ans = GF(2^4) array. Primitive polynomial = D^4+D+1 (19 decimal)
+ 
+Array elements = 
+ 
+          14
+
+>> 
