@@ -22,7 +22,7 @@ function varargout = MeggitDecoder(varargin)
 
 % Edit the above text to modify the response to help MeggitDecoder
 
-% Last Modified by GUIDE v2.5 07-Mar-2014 13:19:40
+% Last Modified by GUIDE v2.5 08-Mar-2014 12:14:27
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -61,6 +61,12 @@ guidata(hObject, handles);
 % UIWAIT makes MeggitDecoder wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
+g = [1 0 0 0 1 0 1 1 1] % Given by g(x) = 1 + X^4 + X^6 + X^7 + X^8
+
+handles.genPoly = g;
+
+guidata(hObject, handles);
+
 
 % --- Outputs from this function are returned to the command line.
 function varargout = MeggitDecoder_OutputFcn(hObject, eventdata, handles) 
@@ -74,18 +80,18 @@ varargout{1} = handles.output;
 
 
 
-function messageVector_Callback(hObject, eventdata, handles)
-% hObject    handle to messageVector (see GCBO)
+function messageVectorTxb_Callback(hObject, eventdata, handles)
+% hObject    handle to messageVectorTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of messageVector as text
-%        str2double(get(hObject,'String')) returns contents of messageVector as a double
+% Hints: get(hObject,'String') returns contents of messageVectorTxb as text
+%        str2double(get(hObject,'String')) returns contents of messageVectorTxb as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function messageVector_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to messageVector (see GCBO)
+function messageVectorTxb_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to messageVectorTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -97,18 +103,18 @@ end
 
 
 
-function encodedVector_Callback(hObject, eventdata, handles)
-% hObject    handle to encodedVector (see GCBO)
+function encodedVectorTxb_Callback(hObject, eventdata, handles)
+% hObject    handle to encodedVectorTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of encodedVector as text
-%        str2double(get(hObject,'String')) returns contents of encodedVector as a double
+% Hints: get(hObject,'String') returns contents of encodedVectorTxb as text
+%        str2double(get(hObject,'String')) returns contents of encodedVectorTxb as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function encodedVector_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to encodedVector (see GCBO)
+function encodedVectorTxb_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to encodedVectorTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -120,18 +126,18 @@ end
 
 
 
-function errorVector_Callback(hObject, eventdata, handles)
-% hObject    handle to errorVector (see GCBO)
+function errorPatternTxb_Callback(hObject, eventdata, handles)
+% hObject    handle to errorPatternTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of errorVector as text
-%        str2double(get(hObject,'String')) returns contents of errorVector as a double
+% Hints: get(hObject,'String') returns contents of errorPatternTxb as text
+%        str2double(get(hObject,'String')) returns contents of errorPatternTxb as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function errorVector_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to errorVector (see GCBO)
+function errorPatternTxb_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to errorPatternTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -143,18 +149,18 @@ end
 
 
 
-function receivedVector_Callback(hObject, eventdata, handles)
-% hObject    handle to receivedVector (see GCBO)
+function receivedVectorTxb_Callback(hObject, eventdata, handles)
+% hObject    handle to receivedVectorTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of receivedVector as text
-%        str2double(get(hObject,'String')) returns contents of receivedVector as a double
+% Hints: get(hObject,'String') returns contents of receivedVectorTxb as text
+%        str2double(get(hObject,'String')) returns contents of receivedVectorTxb as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function receivedVector_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to receivedVector (see GCBO)
+function receivedVectorTxb_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to receivedVectorTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -166,18 +172,18 @@ end
 
 
 
-function decodedVector_Callback(hObject, eventdata, handles)
-% hObject    handle to decodedVector (see GCBO)
+function decodedVectorTxb_Callback(hObject, eventdata, handles)
+% hObject    handle to decodedVectorTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of decodedVector as text
-%        str2double(get(hObject,'String')) returns contents of decodedVector as a double
+% Hints: get(hObject,'String') returns contents of decodedVectorTxb as text
+%        str2double(get(hObject,'String')) returns contents of decodedVectorTxb as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function decodedVector_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to decodedVector (see GCBO)
+function decodedVectorTxb_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to decodedVectorTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -190,10 +196,26 @@ end
 
 % --- Executes on button press in encodeCallback.
 function encodeCallback_Callback(hObject, eventdata, handles)
+
+
 % hObject    handle to encodeCallback (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+g = handles.genPoly; %Generator polynomium
+messageString = get(handles.messageVectorTxb, 'String'); %Message is read from the GUI
+handles.messageVector = messageString(:)'-'0'; %Converted to binary from string
+
+handles.encodedVector = EncodeCyclicSystematic(g,handles.messageVector); %Encoded vector is calculated
+
+encodedVectorString = num2str(handles.encodedVector); %Encoded vector is converted to string
+encodedVectorString(isspace(encodedVectorString)) = '';
+
+%handles.encodedVector = bin2str(handles.encodedVector)
+set(handles.encodedVectorTxb,'String',encodedVectorString) %Encoded vector string is set in the GUI
+
+
+guidata(hObject, handles); %Updates the GUI
 
 
 % --- Executes on button press in transmitCallback.
@@ -202,6 +224,17 @@ function transmitCallback_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+errorString = get(handles.errorPatternTxb, 'String'); %Error pattern is read from the GUI
+handles.errorPattern = errorString(:)'-'0'; %Converted to binary from string
+
+handles.receivedVector = mod(handles.encodedVector + handles.errorPattern,2);
+
+receivedVectorString = num2str(handles.receivedVector); %Received vector is converted to string
+receivedVectorString(isspace(receivedVectorString)) = '';
+
+set(handles.receivedVectorTxb,'String',receivedVectorString) %Received vector string is set in the GUI
+
+guidata(hObject, handles); %Updates the GUI
 
 % --- Executes on button press in resetCallback.
 function resetCallback_Callback(hObject, eventdata, handles)
@@ -209,6 +242,18 @@ function resetCallback_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+set(handles.messageVectorTxb, 'String', ''); %Clearing GUI fields
+set(handles.encodedVectorTxb, 'String', '');
+set(handles.errorPatternTxb, 'String', '000000000000000');
+set(handles.receivedVectorTxb, 'String', '');
+set(handles.encodedVectorTxb, 'String', '');
+set(handles.bufferRegisterTxb, 'String', '');
+set(handles.syndromeRegisterTxb, 'String', '');
+
+handles.messageVector = 0;
+handles.encodedVector = 0;
+handles.errorPattern = 0;
+handles.receivedVector = 0;
 
 % --- Executes on button press in singleStepCallback.
 function singleStepCallback_Callback(hObject, eventdata, handles)
@@ -225,18 +270,18 @@ function stepToEndCallback_Callback(hObject, eventdata, handles)
 
 
 
-function bufferRegister_Callback(hObject, eventdata, handles)
-% hObject    handle to bufferRegister (see GCBO)
+function bufferRegisterTxb_Callback(hObject, eventdata, handles)
+% hObject    handle to bufferRegisterTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of bufferRegister as text
-%        str2double(get(hObject,'String')) returns contents of bufferRegister as a double
+% Hints: get(hObject,'String') returns contents of bufferRegisterTxb as text
+%        str2double(get(hObject,'String')) returns contents of bufferRegisterTxb as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function bufferRegister_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to bufferRegister (see GCBO)
+function bufferRegisterTxb_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to bufferRegisterTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -248,18 +293,18 @@ end
 
 
 
-function edit18_Callback(hObject, eventdata, handles)
-% hObject    handle to edit18 (see GCBO)
+function SyndromeRegisterTxb_Callback(hObject, eventdata, handles)
+% hObject    handle to SyndromeRegisterTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit18 as text
-%        str2double(get(hObject,'String')) returns contents of edit18 as a double
+% Hints: get(hObject,'String') returns contents of SyndromeRegisterTxb as text
+%        str2double(get(hObject,'String')) returns contents of SyndromeRegisterTxb as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit18_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit18 (see GCBO)
+function SyndromeRegisterTxb_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to SyndromeRegisterTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
