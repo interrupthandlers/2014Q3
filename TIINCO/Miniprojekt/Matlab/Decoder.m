@@ -46,8 +46,9 @@ for i = 0:n-1,
     s = mod(s + feedback, 2); %add feedback to syndrom
     s(1) = mod(s(1) + synMod, 2); %apply syndrome modification
     
-    if s == S %should be if s in S
-        buffer(end) = mod(buffer(end) + 1, 2);
+    %check if the syndrome vector corresponds to an error pattern with 1 as highest bit
+    if ismember(s, S, 'rows') %if S contains a vector equal to s
+        buffer(end) = mod(buffer(end) + 1, 2); %correct the buffer
         synMod = 1; %syndrome modification
         errors = errors + 1;
     else
