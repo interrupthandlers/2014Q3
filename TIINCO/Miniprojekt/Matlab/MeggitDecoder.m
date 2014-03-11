@@ -250,7 +250,7 @@ set(handles.encodedVectorTxb, 'String', '');
 set(handles.bufferRegisterTxb, 'String', '');
 set(handles.syndromeRegisterTxb, 'String', '');
 
-handles.messageVector = 0;
+handles.messageVector = 0; %Clearing background variables
 handles.encodedVector = 0;
 handles.errorPattern = 0;
 handles.receivedVector = 0;
