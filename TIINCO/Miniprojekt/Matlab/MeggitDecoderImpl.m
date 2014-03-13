@@ -67,16 +67,27 @@ classdef MeggitDecoderImpl < handle
           disp('Decoding is complete.')
       end
       function [tag, desc] = getStatus(MD)        
-        if MD.s == zeros(1, (MD.n-MD.k-1) + 1) %if syndrome vector is all zeroes
+        if MD.IsInited() == 0
+            tag = 0;
+            desc = 'Decoder unitialized.';
+        elseif MD.IsDecodingComplete() == 0
+            tag = 1;
+            desc = 'Decoding...';          
+        elseif MD.WasDecodingSuccesful() == 1
             %decoded correct, maybe with errors
+            tag = 2;
+            desc = 'Decoded correctly.';
         else
             %uncorrectable
+            tag = 3;
+            desc = 'Uncorrectable.';
         end
-        tag = 0;
-        desc = 'hest';
       end
       function isComplete = IsDecodingComplete(MD)
           isComplete = MD.decodeIteration >= MD.n;
+      end
+      function wasSuccesful = WasDecodingSuccesful(MD)
+          wasSuccesful = isequal(MD.s, zeros(1, (MD.n-MD.k-1) + 1)); %if syndrome vector is all zeroes
       end
       function isInited = IsInited(MD)
           isInited = isempty(MD.r) == 0;

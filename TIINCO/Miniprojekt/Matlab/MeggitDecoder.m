@@ -22,7 +22,7 @@ function varargout = MeggitDecoder(varargin)
 
 % Edit the above text to modify the response to help MeggitDecoder
 
-% Last Modified by GUIDE v2.5 13-Mar-2014 16:38:18
+% Last Modified by GUIDE v2.5 13-Mar-2014 19:17:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -82,121 +82,6 @@ function varargout = MeggitDecoder_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-
-function messageVectorTxb_Callback(hObject, eventdata, handles)
-% hObject    handle to messageVectorTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of messageVectorTxb as text
-%        str2double(get(hObject,'String')) returns contents of messageVectorTxb as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function messageVectorTxb_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to messageVectorTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function encodedVectorTxb_Callback(hObject, eventdata, handles)
-% hObject    handle to encodedVectorTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of encodedVectorTxb as text
-%        str2double(get(hObject,'String')) returns contents of encodedVectorTxb as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function encodedVectorTxb_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to encodedVectorTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function errorPatternTxb_Callback(hObject, eventdata, handles)
-% hObject    handle to errorPatternTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of errorPatternTxb as text
-%        str2double(get(hObject,'String')) returns contents of errorPatternTxb as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function errorPatternTxb_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to errorPatternTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function receivedVectorTxb_Callback(hObject, eventdata, handles)
-% hObject    handle to receivedVectorTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of receivedVectorTxb as text
-%        str2double(get(hObject,'String')) returns contents of receivedVectorTxb as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function receivedVectorTxb_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to receivedVectorTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function decodedVectorTxb_Callback(hObject, eventdata, handles)
-% hObject    handle to decodedVectorTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of decodedVectorTxb as text
-%        str2double(get(hObject,'String')) returns contents of decodedVectorTxb as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function decodedVectorTxb_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to decodedVectorTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
 % --- Executes on button press in encodeCallback.
 function encodeCallback_Callback(hObject, eventdata, handles)
 
@@ -217,6 +102,7 @@ encodedVectorString(isspace(encodedVectorString)) = '';
 %handles.encodedVector = bin2str(handles.encodedVector)
 set(handles.encodedVectorTxb,'String',encodedVectorString) %Encoded vector string is set in the GUI
 
+set(handles.transmitCallback,'Enable','on');
 
 guidata(hObject, handles); %Updates the GUI
 
@@ -236,6 +122,7 @@ receivedVectorString = num2str(handles.receivedVector); %Received vector is conv
 receivedVectorString(isspace(receivedVectorString)) = '';
 
 set(handles.receivedVectorTxb,'String',receivedVectorString) %Received vector string is set in the GUI
+set(handles.startDecondingCallback,'Enable','on');
 
 guidata(hObject, handles); %Updates the GUI
 
@@ -245,13 +132,23 @@ function resetCallback_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-set(handles.messageVectorTxb, 'String', ''); %Clearing GUI fields
+set(handles.messageVectorTxb, 'String', '1010101'); %Clearing GUI fields
 set(handles.encodedVectorTxb, 'String', '');
 set(handles.errorPatternTxb, 'String', '000000000000000');
 set(handles.receivedVectorTxb, 'String', '');
 set(handles.encodedVectorTxb, 'String', '');
 set(handles.bufferRegisterTxb, 'String', '');
 set(handles.syndromeRegisterTxb, 'String', '');
+set(handles.statusTxb,'String','');
+set(handles.correctedErrorsTxb,'String','');
+set(handles.iterationsTxb,'String','');
+
+set(handles.transmitCallback,'Enable','off');
+set(handles.startDecondingCallback,'Enable','off');
+set(handles.singleStepCallback,'Enable','off');
+set(handles.stepToEndCallback,'Enable','off');
+
+set(handles.statusTxb,'BackgroundColor','white');
 
 handles.messageVector = 0; %Clearing background variables
 handles.encodedVector = 0;
@@ -266,15 +163,7 @@ function singleStepCallback_Callback(hObject, eventdata, handles)
 
 handles.decoder.decodeSingleStep();
 
-buffer = num2str(handles.decoder.buffer); %Get buffer value and convert it to a string
-buffer(isspace(buffer)) = ''; %Remove the spaces in the string
-
-set(handles.bufferRegisterTxb,'String',buffer);
-
-syndrome = num2str(handles.decoder.s); %Get syndrome vector and convert it to a string
-syndrome(isspace(syndrome)) = ''; %Remove the spaces in the string
-
-set(handles.syndromeRegisterTxb,'String',syndrome);
+updateGui(handles);
 
 % --- Executes on button press in stepToEndCallback.
 function stepToEndCallback_Callback(hObject, eventdata, handles)
@@ -284,59 +173,7 @@ function stepToEndCallback_Callback(hObject, eventdata, handles)
 
 handles.decoder.decodeFullStep();
 
-buffer = num2str(handles.decoder.buffer); %Get buffer value and convert it to a string
-buffer(isspace(buffer)) = ''; %Remove the spaces in the string
-
-set(handles.bufferRegisterTxb,'String',buffer);
-
-syndrome = num2str(handles.decoder.s); %Get syndrome vector and convert it to a string
-syndrome(isspace(syndrome)) = ''; %Remove the spaces in the string
-
-set(handles.syndromeRegisterTxb,'String',syndrome);
-
-function bufferRegisterTxb_Callback(hObject, eventdata, handles)
-% hObject    handle to bufferRegisterTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of bufferRegisterTxb as text
-%        str2double(get(hObject,'String')) returns contents of bufferRegisterTxb as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function bufferRegisterTxb_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to bufferRegisterTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function syndromeRegisterTxb_Callback(hObject, eventdata, handles)
-% hObject    handle to syndromeRegisterTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of syndromeRegisterTxb as text
-%        str2double(get(hObject,'String')) returns contents of syndromeRegisterTxb as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function syndromeRegisterTxb_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to syndromeRegisterTxb (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
+updateGui(handles);
 
 
 % --- Executes on button press in startDecondingCallback.
@@ -346,7 +183,12 @@ function startDecondingCallback_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 handles.decoder.setReceived(handles.receivedVector); %Load the received vector into the decoder
+updateGui(handles);
+set(handles.singleStepCallback,'Enable','on');
+set(handles.stepToEndCallback,'Enable','on');
 
+
+function updateGui(handles)
 buffer = num2str(handles.decoder.buffer); %Get buffer value and convert it to a string
 buffer(isspace(buffer)) = ''; %Remove the spaces in the string
 
@@ -356,3 +198,30 @@ syndrome = num2str(handles.decoder.s); %Get syndrome vector and convert it to a 
 syndrome(isspace(syndrome)) = ''; %Remove the spaces in the string
 
 set(handles.syndromeRegisterTxb,'String',syndrome);
+
+decodeIteration = num2str(handles.decoder.decodeIteration); %Get errors value and convert it to a string
+set(handles.iterationsTxb,'String',decodeIteration);
+
+correctedErrors = num2str(handles.decoder.correctedErrors); %Get errors value and convert it to a string
+set(handles.correctedErrorsTxb,'String',correctedErrors);
+
+[tag desc] = handles.decoder.getStatus();
+set(handles.statusTxb,'String',desc);
+
+switch tag
+    case 2
+       set(handles.statusTxb,'BackgroundColor','green');
+    case 3
+       set(handles.statusTxb,'BackgroundColor','red');
+    otherwise
+       set(handles.statusTxb,'BackgroundColor','white');        
+end
+
+if handles.decoder.IsDecodingComplete()
+    set(handles.singleStepCallback,'Enable','off');
+    set(handles.stepToEndCallback,'Enable','off');
+    
+    if handles.decoder.WasDecodingSuccesful()
+        set(handles.decodedVectorTxb,'String',buffer(1,9:end)); %message is extracted. Message is end of codeword, as the encoder is systematic.
+    end
+end
