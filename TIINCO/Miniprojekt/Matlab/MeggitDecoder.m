@@ -22,7 +22,7 @@ function varargout = MeggitDecoder(varargin)
 
 % Edit the above text to modify the response to help MeggitDecoder
 
-% Last Modified by GUIDE v2.5 08-Mar-2014 12:14:27
+% Last Modified by GUIDE v2.5 13-Mar-2014 16:38:18
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -61,9 +61,12 @@ guidata(hObject, handles);
 % UIWAIT makes MeggitDecoder wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
-g = [1 0 0 0 1 0 1 1 1] % Given by g(x) = 1 + X^4 + X^6 + X^7 + X^8
+g = [1 0 0 0 1 0 1 1 1];    % Given by g(x) = 1 + X^4 + X^6 + X^7 + X^8
+handles.n = 15;             % Given in the exercise
+handles.k = 7;              % Given in the exercise
 
 handles.genPoly = g;
+handles.decoder = MeggitDecoderImpl(handles.genPoly,handles.n,handles.k);
 
 guidata(hObject, handles);
 
@@ -261,6 +264,17 @@ function singleStepCallback_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+handles.decoder.decodeSingleStep();
+
+buffer = num2str(handles.decoder.buffer); %Get buffer value and convert it to a string
+buffer(isspace(buffer)) = ''; %Remove the spaces in the string
+
+set(handles.bufferRegisterTxb,'String',buffer);
+
+syndrome = num2str(handles.decoder.s); %Get syndrome vector and convert it to a string
+syndrome(isspace(syndrome)) = ''; %Remove the spaces in the string
+
+set(handles.syndromeRegisterTxb,'String',syndrome);
 
 % --- Executes on button press in stepToEndCallback.
 function stepToEndCallback_Callback(hObject, eventdata, handles)
@@ -268,7 +282,17 @@ function stepToEndCallback_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+handles.decoder.decodeFullStep();
 
+buffer = num2str(handles.decoder.buffer); %Get buffer value and convert it to a string
+buffer(isspace(buffer)) = ''; %Remove the spaces in the string
+
+set(handles.bufferRegisterTxb,'String',buffer);
+
+syndrome = num2str(handles.decoder.s); %Get syndrome vector and convert it to a string
+syndrome(isspace(syndrome)) = ''; %Remove the spaces in the string
+
+set(handles.syndromeRegisterTxb,'String',syndrome);
 
 function bufferRegisterTxb_Callback(hObject, eventdata, handles)
 % hObject    handle to bufferRegisterTxb (see GCBO)
@@ -293,18 +317,18 @@ end
 
 
 
-function SyndromeRegisterTxb_Callback(hObject, eventdata, handles)
-% hObject    handle to SyndromeRegisterTxb (see GCBO)
+function syndromeRegisterTxb_Callback(hObject, eventdata, handles)
+% hObject    handle to syndromeRegisterTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of SyndromeRegisterTxb as text
-%        str2double(get(hObject,'String')) returns contents of SyndromeRegisterTxb as a double
+% Hints: get(hObject,'String') returns contents of syndromeRegisterTxb as text
+%        str2double(get(hObject,'String')) returns contents of syndromeRegisterTxb as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function SyndromeRegisterTxb_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to SyndromeRegisterTxb (see GCBO)
+function syndromeRegisterTxb_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to syndromeRegisterTxb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -313,3 +337,22 @@ function SyndromeRegisterTxb_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in startDecondingCallback.
+function startDecondingCallback_Callback(hObject, eventdata, handles)
+% hObject    handle to startDecondingCallback (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+handles.decoder.setReceived(handles.receivedVector); %Load the received vector into the decoder
+
+buffer = num2str(handles.decoder.buffer); %Get buffer value and convert it to a string
+buffer(isspace(buffer)) = ''; %Remove the spaces in the string
+
+set(handles.bufferRegisterTxb,'String',buffer);
+
+syndrome = num2str(handles.decoder.s); %Get syndrome vector and convert it to a string
+syndrome(isspace(syndrome)) = ''; %Remove the spaces in the string
+
+set(handles.syndromeRegisterTxb,'String',syndrome);
