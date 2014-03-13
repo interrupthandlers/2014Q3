@@ -66,12 +66,14 @@ classdef MeggitDecoderImpl < handle
           end
           disp('Decoding is complete.')
       end
-      function getStatus(MD)        
+      function [tag, desc] = getStatus(MD)        
         if MD.s == zeros(1, (MD.n-MD.k-1) + 1) %if syndrome vector is all zeroes
             %decoded correct, maybe with errors
         else
             %uncorrectable
         end
+        tag = 0;
+        desc = 'hest';
       end
       function isComplete = IsDecodingComplete(MD)
           isComplete = MD.decodeIteration >= MD.n;
