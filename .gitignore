@@ -147,3 +147,5 @@ proguard/
 .DS_Store
 
 Thumbs.db
+
+*.asv

@@ -33,6 +33,15 @@ classdef MeggitDecoderImpl < handle
             disp('Decoding is complete.')
             return
         end
+        
+        %check if the syndrome vector corresponds to an error pattern with 1 as highest bit
+        if ismember(MD.s, MD.S, 'rows') %if S contains a vector equal to s
+            MD.buffer(end) = mod(MD.buffer(end) + 1, 2); %correct the buffer
+            MD.synMod = 1; %syndrome modification
+            MD.correctedErrors = MD.correctedErrors + 1;
+        else
+            MD.synMod = 0;
+        end
           
         gate = MD.s(end); %store msb for feedback calc
         MD.s = circshift(MD.s,[0 1]); %shift syndrom 1 right
@@ -45,14 +54,6 @@ classdef MeggitDecoderImpl < handle
         MD.s = mod(MD.s + feedback, 2); %add feedback to syndrom
         MD.s(1) = mod(MD.s(1) + MD.synMod, 2); %apply syndrome modification
 
-        %check if the syndrome vector corresponds to an error pattern with 1 as highest bit
-        if ismember(MD.s, MD.S, 'rows') %if S contains a vector equal to s
-            MD.buffer(end) = mod(MD.buffer(end) + 1, 2); %correct the buffer
-            MD.synMod = 1; %syndrome modification
-            MD.correctedErrors = MD.correctedErrors + 1;
-        else
-            MD.synMod = 0;
-        end
         MD.decodeIteration = MD.decodeIteration + 1;
       end
       function decodeFullStep(MD)
@@ -102,7 +103,7 @@ classdef MeggitDecoderImpl < handle
         
         H = cyclgen(MD.n,MD.g,'system');
 
-        MD.S = E*H'; %calc all syndrome vectors
+        MD.S = mod(E*H',2); %calc all syndrome vectors
       end
       function reset(MD)
         MD.s = zeros(1, (MD.n-MD.k-1) + 1);

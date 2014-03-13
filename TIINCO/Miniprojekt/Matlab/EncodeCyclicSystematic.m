@@ -12,8 +12,8 @@ Xr(length(generatorPoly)) = 1;          %Assign 1 to r'th position
 XrMX = gfconv(Xr, message);
 
 %calculate the remainder(p(X)) of (X^r)m(X) / g(X) 
-[qu p] = gfdeconv(XrMX, generatorPoly); 
+[qu p] = gfdeconv(XrMX, generatorPoly);
 
 %codeword calculated as c(X)= (X^r)m(X) + p(X)
-codeword = mod([ p zeros(1, n - length(p))] + XrMX, 2);
+codeword = mod([ p zeros(1, n - length(p))] + [XrMX zeros(1, n - length(XrMX))], 2);
 end

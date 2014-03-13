@@ -17,5 +17,7 @@ H = cyclgen(15, [1 0 0 0 1 0 1 1 1], 'system');
 S = [];
 
 for i = 1:size(E,1)
-    S = [S ; E(i,:)*H'];
+    si = E(i,:)*H';
+    
+    S = [S ; si];
 end
