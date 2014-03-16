@@ -14,10 +14,6 @@ end
 
 H = cyclgen(15, [1 0 0 0 1 0 1 1 1], 'system');
 
-S = [];
+S = mod(E*H',2);
 
-for i = 1:size(E,1)
-    si = E(i,:)*H';
-    
-    S = [S ; si];
-end
+s = mod([0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 ] * H',2);
