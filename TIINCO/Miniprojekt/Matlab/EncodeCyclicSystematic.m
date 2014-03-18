@@ -6,7 +6,7 @@ n = 15; %15 as per the conditions
 
 %creating X^(n-k) = X^r
 Xr = zeros(1,length(generatorPoly));   %All zero vector with length = r
-Xr(length(generatorPoly)) = 1;          %Assign 1 to r'th position
+Xr(end) = 1;          %Assign 1 to r'th position
 
 %(X^r)m(X)
 XrMX = gfconv(Xr, message);
