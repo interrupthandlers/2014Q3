@@ -66,7 +66,7 @@ handles.n = 15;             % Given in the exercise
 handles.k = 7;              % Given in the exercise
 
 handles.genPoly = g;
-handles.decoder = MeggitDecoderImpl(handles.genPoly,handles.n,handles.k);
+handles.decoder = MeggittDecoderImpl(handles.genPoly,handles.n,handles.k);
 
 guidata(hObject, handles);
 
@@ -212,7 +212,7 @@ switch tag
     case 2
        encodedString = get(handles.encodedVectorTxb, 'String');
        encoded = encodedString(:) - '0';
-       encoded = encoded'
+       encoded = encoded';
        if 0 == isequal(handles.decoder.buffer, encoded)
          set(handles.statusTxb,'String','Uncorrectable.');
          set(handles.statusTxb,'BackgroundColor','red');

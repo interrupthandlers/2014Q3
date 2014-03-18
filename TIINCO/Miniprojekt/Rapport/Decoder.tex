@@ -31,22 +31,46 @@ r(X) = q(X)g(X)+s(X)
 
 The syndrome calculation in the Meggitt decoder is implemented by the circuit in figure \ref{fig:syndromeCirc}. The received vector $r(X)$ is shifted in one bit at a time. When $r(X)$ has been shifted in, the syndrome register.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/syndromeCircuit.png}
+    \includegraphics[width=0.8\textwidth]{figures/syndromeCircuit}
     \caption{Syndrome calculating circuit}
     \label{fig:syndromeCirc}
 \end{figure}
 
-\code{hest}
+The entire Meggitt circuit is shown on figure \ref{fig:meggitCirc}. The Meggitt decoder only corrects one bit at a time -- the most significant bit. This simplifies the circuit.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/meggitCircuit}
+    \caption{Meggitt circuit}
+    \label{fig:meggitCirc}
+\end{figure}
 
+The steps taken to perform a Meggitt decoding is as follows:
 
-\section{Decoder overview}
+\begin{enumerate}
+\item Shift $r(X)$ into the decoder, thus calculating the syndrome vector and populating the buffer with the received vector.
+\item \label{enm:loopStart} Check if the syndrome register matches a syndrome vector corresponding with an error pattern with the highest bit in error.
+\begin{enumerate}
+\item if not the case: shift $r(X)$(the buffer) and $s(X)$.
+\item if is the case
+\begin{enumerate}
+\item Complement MSb of the buffer.
+\item Shift the buffer to create $r_1(X)$.
+\item Shift the syndrome register to create $S_1^{(1)}(X)$.
+\end{enumerate}
+\end{enumerate}
+\item Repeat the process in \ref{enm:loopStart} foreach bit in the received vector $r(X)$.
+\end{enumerate}
+
+\section{Decoder implementation overview}
+
+The functionality of the Meggitt decoder is implemented in the file \code{MeggittDecoderImpl.m} which is included in appendix \ref{}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/MeggitDecoderUML.png}
+    \includegraphics[width=0.8\textwidth]{figures/MeggitDecoderUML}
     \caption{Meggitt decoder UML class diagram}
     \label{fig:meggittUML}
 \end{figure}

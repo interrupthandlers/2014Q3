@@ -1,4 +1,4 @@
-classdef MeggitDecoderImpl < handle
+classdef MeggittDecoderImpl < handle
    properties (Hidden)
       synMod = 0;
    end
@@ -14,7 +14,7 @@ classdef MeggitDecoderImpl < handle
       S; % all syndrome vectors corresponding to error patterns with 1 as highest bit
    end   
    methods(Access = public)
-      function MD = MeggitDecoderImpl(g, n, k) %constructor
+      function MD = MeggittDecoderImpl(g, n, k) %constructor
         MD.g = g;
         MD.n = n;
         MD.k = k;
