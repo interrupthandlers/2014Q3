@@ -1,0 +1,56 @@
+\documentclass[Main]{subfiles}
+\begin{document}
+
+
+\chapter{Encoder}
+An encoder has the task of transforming the message vector into the codeword. In this project the following additional requirements apply to the encoder function:
+
+\begin{itemize}
+\item The function has two inputs
+	\begin{itemize}
+	\item Generator polynomial
+	\item Message vector
+	\end{itemize}
+\item The function has one output
+	\begin{itemize}
+	\item Code vector
+	\end{itemize}
+\item The code vector must be in systematic form
+\end{itemize} 
+
+\section{Cyclic codes in systematic form}
+This section explains the theory of constructing cyclic codes in systematic form and is based on \emph{Essentials of Error Control Coding}\cite{essentials} section 3.4
+
+The regular procedure for constructing cyclic codewords is to multiply the message polynomial $m(X)$ with the generator polynomial $g(X)$ to obtain the codeword $c(X)$. However this encoding process produces non-systematic codewords, which is not preferable when implementing a decoder in hardware. Therefore the systematic encoding procedure is introduced.
+
+Given a message polynomial of the form:
+
+{\centering 
+$m(X) = m_0 + m_1X + ... + m_{k-1}X^{k-1}$ \par}
+
+the systematic codeword can be obtained by performing the following steps.
+
+\begin{enumerate}
+\item The polynomial $X^{n-k}m(X) = m_0X^{n-k} + m_1X^{n-k+1} + ... +m_{k-1}X^{n-1}$ is formed and divided with the generator polynomial $g(X)$:
+\begin{equation} \label{eq:XrdividedByGenerator}
+X^{n-k}m(X) = q(X)g(X)+p(X)
+\end{equation}
+
+\item When reordering equation \ref{eq:XrdividedByGenerator} the following is obtained:
+\begin{equation} \label{eq:XrdividedByGeneratorReoreded}
+X^{n-k}m(X)+ p(X)=q(X)g(X)
+\end{equation}
+
+\item $X^{n-k}m(X)+p(X)$ is a code polynomial since it is a factor of $g(X)$. Furthermore the systematic form is verified by seeing that the term $X^{n-k}m(X)$ is the message vector right-shifted n-k times, and that $p(X)$ is the redundancy polynomial which occupies the lower degree terms of the polynomial expression of the codeword $c(X)$:
+
+{\centering 
+$c(X) = p_0 + p_1X + ... + p_{n-k}X^{n-k-1} + m_0X^{n-k} + m_1X^{n-k+1}+...+m_{k-1}X^{n-1}$ \par}
+
+\end{enumerate}
+
+\section{Implementation}
+
+
+
+
+\end{document} 
