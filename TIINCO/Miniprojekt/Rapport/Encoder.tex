@@ -11,9 +11,9 @@
     stringstyle=\color{mylilas},
     commentstyle=\color{mygreen},%
     showstringspaces=false,%without this there will be a symbol in the places where there is a space
-    numbers=left,%
-    numberstyle={\tiny \color{black}},% size of the numbers
-    numbersep=9pt, % this defines how far the numbers are from the text
+   % numbers=left,%
+   % numberstyle={\tiny \color{black}},% size of the numbers
+    %numbersep=9pt, % this defines how far the numbers are from the text
     emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
     %emph=[2]{word1,word2}, emphstyle=[2]{style},    
 }
@@ -66,17 +66,13 @@ $c(X) = p_0 + p_1X + ... + p_{n-k}X^{n-k-1} + m_0X^{n-k} + m_1X^{n-k+1}+...+m_{k
 \end{enumerate}
 
 \section{Implementation}
-The encoder has been implemented in Matlab and in accordance to steps described in the previous section. 
+The encoder has been implemented in a Matlab function called  \code{EncodeCyclicSystematic()}, which takes the generator polynomial and message vector as inputs and returns the codeword as output.
 
-A Matlab function called EncodeCyclicSystematic() has been made which takes the generator polynomial and message vector as inputs and returns the codeword as output.  
+The algorithm implemented by the function conforms to the steps described in the previous section. The code segments shown here display the most important parts of the source code. The complete function can be found in Appendix \ref{App:SourceCode}. 
 
+\begin{enumerate}
+\item The polynomial $X^{n-k}m(X)$ is formed and divided by $g(X)$:
 \begin{lstlisting}
-function codeword = EncodeCyclicSystematic(generatorPoly, message)
-%based on example 3.2 in the book
-
-k = length(message); %7 as per the conditions
-n = 15; %15 as per the conditions
-
 %creating X^(n-k) = X^r
 Xr = zeros(1,length(generatorPoly));   %All zero vector with length = r
 Xr(end) = 1;          %Assign 1 to r'th position
@@ -86,11 +82,17 @@ XrMX = gfconv(Xr, message);
 
 %calculate the remainder(p(X)) of (X^r)m(X) / g(X) 
 [qu p] = gfdeconv(XrMX, generatorPoly);
+\end{lstlisting}
 
+\item $c(X)$ is obtained by adding  $X^{n-k}m(X)$ and $p(X)$ (step 2 and 3 from previous section)
+
+\begin{lstlisting}
 %codeword calculated as c(X)= (X^r)m(X) + p(X)
 codeword = mod([ p zeros(1, n - length(p))] + [XrMX zeros(1, n - length(XrMX))], 2);
-end
 \end{lstlisting}
+\end{enumerate}
+
+
 
 \section{Channel transmission}
 
