@@ -1,10 +1,27 @@
 \documentclass[Main]{subfiles}
 \begin{document}
 
+\lstset{language=Matlab,%
+    basicstyle=\ttfamily,%
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+   % numbers=left,%
+   % numberstyle={\tiny \color{black}},% size of the numbers
+    %numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
 
 \chapter{Decoder}
 
-\section{Operation of the Meggitt decoder}
+\section{Operation of the Meggitt decoder} \label{sec:MeggitOperation}
 
 When decoding cyclic codes, the straight forward approach involves creating a table, that matches all possible error patterns to the corresponding syndrome vector. This approach is impractical when creating a decoding circuit, because the complexity of the circuit tends to grow exponentially with code length and number of errors corrected \cite{lec7}.
 
@@ -66,18 +83,57 @@ The steps taken to perform a Meggitt decoding is as follows:
 
 \section{Decoder implementation overview}
 
-The functionality of the Meggitt decoder is implemented in the file \code{MeggittDecoderImpl.m} which is included in appendix \ref{}
+The functionality of the Meggitt decoder is implemented in the file \code{MeggittDecoderImpl.m} which is included in appendix \ref{App:SourceCode}. The Meggitt decoder is implemented in the MATLAB class \code{MeggittDecoderImpl} with UML diagram shown in figure \ref{fig:meggittUML}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/MeggitDecoderUML}
+    \includegraphics[width=0.7\textwidth]{figures/MeggitDecoderUML}
     \caption{Meggitt decoder UML class diagram}
     \label{fig:meggittUML}
 \end{figure}
 
+A sample usage of the decoder class and the encoder function is shown in listing \ref{lst:sample}. The sample uses the generator polynomial stated in the conditions of the project.
 
+\begin{lstlisting}[label={lst:sample},captionpos=b, caption=Sample usage of the decoder.] 
+%setup
+g = [1 0 0 0 1 0 1 1 1]; %g(x) = 1 + X^4 + X^6 + X^7 + X^8
+n = 15;
+k = 7;
+m = [1 0 1 0 1 0 1];
+c = EncodeCyclicSystematic(g, m);
+e = [0 0 0 0 0 0 0 0 0 0 0 0 1 0 1];
+r = mod(c + e, 2);
+
+md = MeggittDecoderImpl(g, n, k)	%initialize decoder
+md.setReceived(r)			%set received vector
+md.decodeFullStep()			%perform decoding
+\end{lstlisting}
+
+\code{md.decodeFullStep()} Runs remaining decoding iterations -- a single decoding iteration can be performed using \code{md.decodeSingleStep()}. This allows monitoring of the class data properties such as the buffer and syndrome registers during the decoding.
+
+\section{Generation of syndrome vectors}
+Because the Meggitt decoder only corrects the most significant bit at a given time, the Meggitt decoder only needs to detect syndome vectors, which correspond to an error pattern with the highest bit in error. The function \code{createSyndromeVectors()} generates a matrix, S, containing the relevant syndrome vectors. The part of the function relevant for a code capable of correcting 2 errors is listed (\ref{lst:CreateSyndromes}). \code{MD} is the instance of the decoder class.
+
+\begin{lstlisting}[label={lst:CreateSyndromes},captionpos=b, caption=Creating possible syndrome vectors.] 
+%create 2 bit error patterns with highest bit in error
+E = eye(MD.n);
+E(:,MD.n) = 1;
+
+H = cyclgen(MD.n,MD.g,'system'); %create parity check matrix
+MD.PossibleSyndromes = mod(E*H',2); %calc all syndrome vectors
+\end{lstlisting}
+
+\section{Decoder implementation}
+The key part, and also the most difficult part, of the decoder is implementing the algorithm to perform an iteration of the decoding process described in section \ref{sec:MeggitOperation}.
 
 \fxnote{FIXME: Husk key difficulties her}
+
+
+\section{Decoder implementation}
+
+
+
+
 
 
 \end{document} 

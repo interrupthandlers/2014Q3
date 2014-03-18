@@ -94,7 +94,7 @@ classdef MeggittDecoderImpl < handle
       end
    end % methods (public)
    methods(Access = private)
-      function createSyndromeVectors(MD)
+      function createSyndromeVectors(MD) 
         dmin = gfweight(MD.g);
         t = floor((dmin-1)/2);
         
@@ -103,13 +103,9 @@ classdef MeggittDecoderImpl < handle
         E(end) = 1;
       
         if t > 1
-            %create 2 bit error patterns
-            for i = 1:MD.n-1
-                e = zeros(1, MD.n);
-                e(i) = 1; %set bit
-                e(end) = 1; %set MSb (all 2 pattern have MSb set)
-                E = [E ; e]; 
-            end
+            %create 2 bit error patterns with highest bit in error
+            E = eye(MD.n);
+            E(:,MD.n) = 1;
         elseif t > 2
             error('Number of error bits not supported.') %2 bits needs to be supported.
         end
