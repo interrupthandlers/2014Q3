@@ -31,18 +31,25 @@ r(X) = q(X)g(X)+s(X)
 
 The syndrome calculation in the Meggitt decoder is implemented by the circuit in figure \ref{fig:syndromeCirc}. The received vector $r(X)$ is shifted in one bit at a time. When $r(X)$ has been shifted in, the syndrome register.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/syndromeCircuit.png}
     \caption{Syndrome calculating circuit}
     \label{fig:syndromeCirc}
 \end{figure}
 
+\code{hest}
+
 
 
 \section{Decoder overview}
 
-uml stuff
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/MeggitDecoderUML.png}
+    \caption{Meggitt decoder UML class diagram}
+    \label{fig:meggittUML}
+\end{figure}
 
 
 

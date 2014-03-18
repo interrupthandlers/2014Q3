@@ -22,7 +22,7 @@ classdef MeggitDecoderImpl < handle
       end
       function setReceived(MD, r)
         MD.r = r;
-        MD.reset()              
+        MD.calcSyndrome()              
       end
       function decodeSingleStep(MD)
         if MD.IsInited() == 0
@@ -118,7 +118,7 @@ classdef MeggitDecoderImpl < handle
 
         MD.S = mod(E*H',2); %calc all syndrome vectors
       end
-      function reset(MD)
+      function calcSyndrome(MD)
         MD.s = zeros(1, (MD.n-MD.k-1) + 1);
         MD.buffer = MD.r;
         MD.correctedErrors = 0;
