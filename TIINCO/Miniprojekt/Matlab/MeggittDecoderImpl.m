@@ -83,6 +83,13 @@ classdef MeggittDecoderImpl < handle
             desc = 'Uncorrectable.';
         end
       end
+      function errorVector = getErrorVector(MD)
+        if MD.IsDecodingComplete() == 1 && MD.WasDecodingSuccesful() == 1
+            errorVector = mod(MD.r + MD.buffer,2);
+        else
+            error('Decoding is not done and/or unsuccesful.')
+        end
+      end
       function isComplete = IsDecodingComplete(MD)
           isComplete = MD.decodeIteration >= MD.n;
       end

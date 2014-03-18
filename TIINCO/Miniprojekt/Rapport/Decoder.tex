@@ -21,6 +21,8 @@
 
 \chapter{Decoder}
 
+This chapter describes the Meggitt decoder, and the MATLAB implementation created during this project.
+
 \section{Operation of the Meggitt decoder} \label{sec:MeggitOperation}
 
 When decoding cyclic codes, the straight forward approach involves creating a table, that matches all possible error patterns to the corresponding syndrome vector. This approach is impractical when creating a decoding circuit, because the complexity of the circuit tends to grow exponentially with code length and number of errors corrected \cite{lec7}.
@@ -109,10 +111,10 @@ md.setReceived(r)			%set received vector
 md.decodeFullStep()			%perform decoding
 \end{lstlisting}
 
-\code{md.decodeFullStep()} Runs remaining decoding iterations -- a single decoding iteration can be performed using \code{md.decodeSingleStep()}. This allows monitoring of the class data properties such as the buffer and syndrome registers during the decoding.
+\code{md.decodeFullStep()} Runs remaining decoding iterations -- a single decoding iteration can be performed using \code{md.decodeSingleStep()}. This allows monitoring of the class data properties such as the buffer and syndrome registers between iterations during the decoding.
 
 \section{Generation of syndrome vectors}
-Because the Meggitt decoder only corrects the most significant bit at a given time, the Meggitt decoder only needs to detect syndome vectors, which correspond to an error pattern with the highest bit in error. The function \code{createSyndromeVectors()} generates a matrix, S, containing the relevant syndrome vectors. The part of the function relevant for a code capable of correcting 2 errors is listed (\ref{lst:CreateSyndromes}). \code{MD} is the instance of the decoder class.
+Because the Meggitt decoder only corrects the most significant bit at a given time, the Meggitt decoder only needs to detect syndome vectors, which correspond to an error pattern with the highest bit in error. The function \code{createSyndromeVectors()} generates a matrix, S, containing the relevant syndrome vectors, when an instance of the \code{MeggittDecoderImpl} class is created. The part of the function relevant for a code capable of correcting 2 errors is listed (\ref{lst:CreateSyndromes}). \code{MD} is the instance of the decoder class.
 
 \begin{lstlisting}[label={lst:CreateSyndromes},captionpos=b, caption=Creating possible syndrome vectors.] 
 %create 2 bit error patterns with highest bit in error
@@ -124,15 +126,35 @@ MD.PossibleSyndromes = mod(E*H',2); %calc all syndrome vectors
 \end{lstlisting}
 
 \section{Decoder implementation}
-The key part, and also the most difficult part, of the decoder is implementing the algorithm to perform an iteration of the decoding process described in section \ref{sec:MeggitOperation}.
+The key part, and also the most difficult part, of the decoder is implementing the algorithm to perform an iteration of the Meggitt decoding process described in section \ref{sec:MeggitOperation}. The function \code{decodeSingleStep()} implements this functionality and is shown in listing \ref{lst:decodeSingleStep}.
 
-\fxnote{FIXME: Husk key difficulties her}
+\begin{lstlisting}[label={lst:decodeSingleStep},captionpos=b, caption=Decoding a single iteration.] 
+%check if the syndrome vector corresponds to an error pattern with 1 as highest bit
+if ismember(MD.syndrome, MD.PossibleSyndromes, 'rows') %if PossibleSyndromes contains a vector equal to syndrome
+	MD.buffer(end) = mod(MD.buffer(end) + 1, 2); %correct the buffer
+	MD.synMod = 1; %syndrome modification
+	MD.correctedErrors = MD.correctedErrors + 1;
+else
+	MD.synMod = 0;
+end
+  
+gate = MD.syndrome(end); %store msb for feedback calc
+MD.syndrome = circshift(MD.syndrome,[0 1]); %shift syndrom 1 right
+MD.syndrome(1) = 0; %reset lsb to counter circshift() wrapping around
+MD.buffer = circshift(MD.buffer,[0 1]); %shift syndrom 1 right    
 
+%calc and apply feedback
+feedback = gate * MD.generator;
+feedback(end) = []; %remove msb
+MD.syndrome = mod(MD.syndrome + feedback, 2); %add feedback to syndrom
+MD.syndrome(1) = mod(MD.syndrome(1) + MD.synMod, 2); %apply syndrome modification
 
-\section{Decoder implementation}
+MD.decodeIteration = MD.decodeIteration + 1;
+\end{lstlisting}
 
+The function \code{decodeFullStep()} performs a full decoding by calling \code{decodeSingleStep()} repeatedly until $n$ iterations have been run.
 
-
+The initial syndrome vector is calculated by the function  \code{calcSyndrome()} when \code{setRecieved()} is called using a similar algorithm as \code{decodeSingleStep()}.
 
 
 
