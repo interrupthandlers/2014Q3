@@ -210,12 +210,21 @@ set(handles.statusTxb,'String',desc);
 
 switch tag
     case 2
-       set(handles.statusTxb,'BackgroundColor','green');
+       encodedString = get(handles.encodedVectorTxb, 'String');
+       encoded = encodedString(:) - '0';
+       encoded = encoded'
+       if 0 == isequal(handles.decoder.buffer, encoded)
+         set(handles.statusTxb,'String','Uncorrectable.');
+         set(handles.statusTxb,'BackgroundColor','red');
+       else
+         set(handles.statusTxb,'BackgroundColor','green');
+       end
     case 3
        set(handles.statusTxb,'BackgroundColor','red');
     otherwise
        set(handles.statusTxb,'BackgroundColor','white');        
 end
+
 
 if handles.decoder.IsDecodingComplete()
     set(handles.singleStepCallback,'Enable','off');
