@@ -1,6 +1,23 @@
 \documentclass[Main]{subfiles}
 \begin{document}
 
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
 
 \chapter{Encoder}
 An encoder has the task of transforming the message vector into the codeword. In this project the following additional requirements apply to the encoder function:
@@ -49,8 +66,33 @@ $c(X) = p_0 + p_1X + ... + p_{n-k}X^{n-k-1} + m_0X^{n-k} + m_1X^{n-k+1}+...+m_{k
 \end{enumerate}
 
 \section{Implementation}
+The encoder has been implemented in Matlab and in accordance to steps described in the previous section. 
 
+A Matlab function called EncodeCyclicSystematic() has been made which takes the generator polynomial and message vector as inputs and returns the codeword as output.  
 
+\begin{lstlisting}
+function codeword = EncodeCyclicSystematic(generatorPoly, message)
+%based on example 3.2 in the book
+
+k = length(message); %7 as per the conditions
+n = 15; %15 as per the conditions
+
+%creating X^(n-k) = X^r
+Xr = zeros(1,length(generatorPoly));   %All zero vector with length = r
+Xr(end) = 1;          %Assign 1 to r'th position
+
+%(X^r)m(X)
+XrMX = gfconv(Xr, message);
+
+%calculate the remainder(p(X)) of (X^r)m(X) / g(X) 
+[qu p] = gfdeconv(XrMX, generatorPoly);
+
+%codeword calculated as c(X)= (X^r)m(X) + p(X)
+codeword = mod([ p zeros(1, n - length(p))] + [XrMX zeros(1, n - length(XrMX))], 2);
+end
+\end{lstlisting}
+
+\section{Channel transmission}
 
 
 \end{document} 
