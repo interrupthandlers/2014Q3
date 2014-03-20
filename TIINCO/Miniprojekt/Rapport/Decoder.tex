@@ -38,9 +38,12 @@ polynomial $S(X)$. Then a cyclic right shift of the received polynomial $r^{(1)}
 
 Theorem 3.1 can be summarized as such:
 
+\begin{center}
+
 $ r(X) \hspace*{2em}  \Rightarrow^{rightshift} \hspace*{2em} r^{(1)}(X)$ \\
 $ \Downarrow \hspace*{12em} \Downarrow$ \\
 $ S(X) \hspace*{9em} S^{(1)}(X)$ \\
+\end{center}
 
 The syndrome vector can be calculated using equation \ref{eq:syndromeEq}.
 
@@ -48,7 +51,7 @@ The syndrome vector can be calculated using equation \ref{eq:syndromeEq}.
 r(X) = q(X)g(X)+s(X)
 \end{equation}
 
-The syndrome calculation in the Meggitt decoder is implemented by the circuit in figure \ref{fig:syndromeCirc}. The received vector $r(X)$ is shifted in one bit at a time. When $r(X)$ has been shifted in, the syndrome register.
+The syndrome calculation in the Meggitt decoder is implemented by the circuit in figure \ref{fig:syndromeCirc}. The received vector $r(X)$ is shifted in one bit at a time. When $r(X)$ has been shifted in, the syndrome vector is contained in the syndrome register ($S_0, S_1, ... ,S_{n-k-1}$).
 
 \begin{figure}[H]
     \centering
@@ -66,7 +69,7 @@ The entire Meggitt circuit is shown on figure \ref{fig:meggitCirc}. The Meggitt 
     \label{fig:meggitCirc}
 \end{figure}
 
-The steps taken to perform a Meggitt decoding is as follows:
+The steps taken to perform Meggitt decoding are as follows:
 
 \begin{enumerate}
 \item Shift $r(X)$ into the decoder, thus calculating the syndrome vector and populating the buffer with the received vector.
@@ -80,7 +83,7 @@ The steps taken to perform a Meggitt decoding is as follows:
 \item Shift the syndrome register to create $S_1^{(1)}(X)$.
 \end{enumerate}
 \end{enumerate}
-\item Repeat the process in \ref{enm:loopStart} foreach bit in the received vector $r(X)$.
+\item Repeat the process in \ref{enm:loopStart} for each bit in the received vector $r(X)$.
 \end{enumerate}
 
 \section{Decoder implementation overview}
@@ -95,6 +98,8 @@ The functionality of the Meggitt decoder is implemented in the file \code{Meggit
 \end{figure}
 
 A sample usage of the decoder class and the encoder function is shown in listing \ref{lst:sample}. The sample uses the generator polynomial stated in the conditions of the project.
+
+\fxnote{Attach a listing to all code segments}
 
 \begin{lstlisting}[label={lst:sample},captionpos=b, caption=Sample usage of the decoder.] 
 %setup
@@ -111,10 +116,10 @@ md.setReceived(r)			%set received vector
 md.decodeFullStep()			%perform decoding
 \end{lstlisting}
 
-\code{md.decodeFullStep()} Runs remaining decoding iterations -- a single decoding iteration can be performed using \code{md.decodeSingleStep()}. This allows monitoring of the class data properties such as the buffer and syndrome registers between iterations during the decoding.
+\code{md.decodeFullStep()} runs all or remaining decoding iterations -- a single decoding iteration can be performed using \code{md.decodeSingleStep()}. This allows monitoring of the class data properties such as the buffer and syndrome registers between iterations during the decoding.
 
 \section{Generation of syndrome vectors}
-Because the Meggitt decoder only corrects the most significant bit at a given time, the Meggitt decoder only needs to detect syndome vectors, which correspond to an error pattern with the highest bit in error. The function \code{createSyndromeVectors()} generates a matrix, S, containing the relevant syndrome vectors, when an instance of the \code{MeggittDecoderImpl} class is created. The part of the function relevant for a code capable of correcting 2 errors is listed (\ref{lst:CreateSyndromes}). \code{MD} is the instance of the decoder class.
+Because the Meggitt decoder only corrects the most significant bit at a given time, the Meggitt decoder only needs to detect syndome vectors, which correspond to an error pattern with the highest bit in error. The function \code{createSyndromeVectors()} generates a matrix, S, containing the relevant syndrome vectors, when an instance of the \code{MeggittDecoderImpl} class is created. The part of the function relevant for a code capable of correcting 2 errors is shown in listing (\ref{lst:CreateSyndromes}). \code{MD} is the instance of the decoder class.
 
 \begin{lstlisting}[label={lst:CreateSyndromes},captionpos=b, caption=Creating possible syndrome vectors.] 
 %create 2 bit error patterns with highest bit in error
