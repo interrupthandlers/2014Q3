@@ -1,5 +1,8 @@
 function codeword = EncodeCyclicSystematic(generatorPoly, message)
-%based on example 3.2 in the book
+%Example generator g = 1 + X^4 + X^6 + X^7 + X^8 =   1 0 0 0 1 0 1 1 1] 
+%Example message m = X^3 + X^4 + X^5 + X^6 =         [0 0 0 1 1 1 1]
+%Example statement: codeword =                          EncodeCyclicSystematic(g,m)
+%Example output: codeword =                             [1 1 0 1 1 1 0 1 0 0 0 1 1 1 1]
 
 k = length(message); %7 as per the conditions
 n = 15; %15 as per the conditions

@@ -15,16 +15,53 @@ classdef MeggittDecoderImpl < handle
    end   
    methods(Access = public)
       function MD = MeggittDecoderImpl(g, n, k) %constructor
+        %Example generator g = 1 + X^4 + X^6 + X^7 + X^8 =      1 0 0 0 1 0 1 1 1] 
+        %Example code lenngth n =                               15
+        %Example message length k =                             7
+        %Example statement:                                     MD = MeggittDecoderImpl(g,n,k)
+        %Example output:
+        %                MD = 
+        %
+        %          MeggittDecoderImpl with properties:
+        %
+        %                          g: [1 0 0 0 1 0 1 1 1]
+        %                          n: 15
+        %                          k: 7
+        %                          r: []
+        %                          s: []
+        %                     buffer: []
+        %            correctedErrors: 0
+        %            decodeIteration: 0
+        %                          S: [15x8 double]
+
         MD.g = g;
         MD.n = n;
         MD.k = k;
         MD.createSyndromeVectors()
       end
       function setReceived(MD, r)
+        %Example received vector r = [1 1 0 1 1 1 0 1 0 0 0 1 1 0 0]
+        %Example statement: MD.setReceived(r)
+        %Example output:
+        %                MD = 
+        %
+        %          MeggittDecoderImpl with properties:
+        %
+        %                          g: [1 0 0 0 1 0 1 1 1]
+        %                          n: 15
+        %                          k: 7
+        %                          r: [1 1 0 1 1 1 0 1 0 0 0 1 1 0 0]
+        %                          s: [0 0 1 1 1 0 0 1]
+        %                     buffer: [1 1 0 1 1 1 0 1 0 0 0 1 1 0 0]
+        %            correctedErrors: 0
+        %            decodeIteration: 0
+        %                          S: [15x8 double]
+        
         MD.r = r;
         MD.calcSyndrome()              
       end
       function decodeSingleStep(MD)
+          %Performs one iteration of the decoding
         if MD.IsInited() == 0
             error('Received vector is uninitialized.')
         end
