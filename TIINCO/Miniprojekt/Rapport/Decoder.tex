@@ -86,7 +86,7 @@ The steps taken to perform Meggitt decoding are as follows:
 \item Repeat the process in \ref{enm:loopStart} for each bit in the received vector $r(X)$.
 \end{enumerate}
 
-\section{Decoder implementation overview}
+\section{Decoder implementation overview}\label{sec:decImplOv}
 
 The functionality of the Meggitt decoder is implemented in the file \code{MeggittDecoderImpl.m} which is included in appendix \ref{App:SourceCode}. The Meggitt decoder is implemented in the MATLAB class \code{MeggittDecoderImpl} with UML diagram shown in figure \ref{fig:meggittUML}.
 
@@ -98,9 +98,7 @@ The functionality of the Meggitt decoder is implemented in the file \code{Meggit
 \end{figure}
 
 A sample usage of the decoder class and the encoder function is shown in listing \ref{lst:sample}. The sample uses the generator polynomial stated in the conditions of the project.
-
-\fxnote{Attach a listing to all code segments}
-
+\fxnote{tilføj input/output beskrivelse til kode}
 \begin{lstlisting}[label={lst:sample},captionpos=b, caption=Sample usage of the decoder.] 
 %setup
 g = [1 0 0 0 1 0 1 1 1]; %g(x) = 1 + X^4 + X^6 + X^7 + X^8
@@ -132,7 +130,7 @@ H = cyclgen(MD.n,MD.g,'system'); %create parity check matrix
 MD.PossibleSyndromes = mod(E*H',2); %calc all syndrome vectors
 \end{lstlisting}
 
-\section{Decoder implementation}
+\section{Decoder implementation} \label{sec:decoderImpl}
 The key part, and also the most difficult part, of the decoder is implementing the algorithm to perform an iteration of the Meggitt decoding process described in section \ref{sec:MeggitOperation}. The function \code{decodeSingleStep()} implements this functionality and is shown in listing \ref{lst:decodeSingleStep}.
 
 \begin{lstlisting}[label={lst:decodeSingleStep},captionpos=b, caption=Decoding a single iteration.] 
