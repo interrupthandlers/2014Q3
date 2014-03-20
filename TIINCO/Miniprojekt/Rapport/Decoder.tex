@@ -109,6 +109,8 @@ r = mod(c + e, 2);
 md = MeggittDecoderImpl(g, n, k)	%initialize decoder
 md.setReceived(r)			%set received vector
 md.decodeFullStep()			%perform decoding
+decoded = md.buffer;		%buffer contains the decoded vector
+eCalc = md.getErrorVector();
 \end{lstlisting}
 
 \code{md.decodeFullStep()} Runs remaining decoding iterations -- a single decoding iteration can be performed using \code{md.decodeSingleStep()}. This allows monitoring of the class data properties such as the buffer and syndrome registers between iterations during the decoding.

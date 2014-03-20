@@ -72,7 +72,7 @@ The algorithm implemented by the function conforms to the steps described in the
 
 \begin{enumerate}
 \item The polynomial $X^{n-k}m(X)$ is formed and divided by $g(X)$:
-\begin{lstlisting}
+\begin{lstlisting}[label={lst:obtainP},captionpos=b, caption=Obtaining $p(X)$ as the remainder of $X^rm(X) / g(X)$.] 
 %creating X^(n-k) = X^r
 Xr = zeros(1,length(generatorPoly));   %All zero vector with length = r
 Xr(end) = 1;          %Assign 1 to r'th position
@@ -86,8 +86,7 @@ XrMX = gfconv(Xr, message);
 
 \item $c(X)$ is obtained by adding  $X^{n-k}m(X)$ and $p(X)$ (step 2 and 3 from previous section)
 
-\begin{lstlisting}
-%codeword calculated as c(X)= (X^r)m(X) + p(X)
+\begin{lstlisting}[label={lst:obtainC},captionpos=b, caption=Obtaining $c(X)$ by adding $X^{n-k}m(X)$ and $p(X)$.]
 codeword = mod([ p zeros(1, n - length(p))] + [XrMX zeros(1, n - length(XrMX))], 2);
 \end{lstlisting}
 \end{enumerate}
