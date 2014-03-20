@@ -36,9 +36,10 @@ An encoder has the task of transforming the message vector into the codeword. In
 \end{itemize} 
 
 \section{Cyclic codes in systematic form}
+\label{sec:cyclicCodeInSystematicForm}
 This section explains the theory of constructing cyclic codes in systematic form and is based on \emph{Essentials of Error Control Coding}\cite{essentials} section 3.4
 
-The regular procedure for constructing cyclic codewords is to multiply the message polynomial $m(X)$ with the generator polynomial $g(X)$ to obtain the codeword $c(X)$. However this encoding process produces non-systematic codewords, which is not preferable when implementing a decoder in hardware. Therefore the systematic encoding procedure is introduced.
+The regular procedure for constructing cyclic codewords is to multiply the message polynomial $m(X)$ with the generator polynomial $g(X)$ to obtain the codeword $c(X)$. However this encoding process produces non-systematic codewords, which are not preferable when implementing a decoder in hardware. Therefore the systematic encoding procedure is introduced.
 
 Given a message polynomial of the form:
 
@@ -68,7 +69,7 @@ $c(X) = p_0 + p_1X + ... + p_{n-k}X^{n-k-1} + m_0X^{n-k} + m_1X^{n-k+1}+...+m_{k
 \section{Implementation}
 The encoder has been implemented in a Matlab function called  \code{EncodeCyclicSystematic()}, which takes the generator polynomial and message vector as inputs and returns the codeword as output.
 
-The algorithm implemented by the function conforms to the steps described in the previous section. The code segments shown here display the most important parts of the source code. The complete function can be found in Appendix \ref{App:SourceCode}. 
+The algorithm implemented by the function conforms to the steps described in section \ref{sec:cyclicCodeInSystematicForm}. The code segments shown here display the most important parts of the source code. The complete function can be found in Appendix \ref{App:SourceCode}. 
 
 \begin{enumerate}
 \item The polynomial $X^{n-k}m(X)$ is formed and divided by $g(X)$:
@@ -94,6 +95,13 @@ codeword = mod([ p zeros(1, n - length(p))] + [XrMX zeros(1, n - length(XrMX))],
 
 
 \section{Channel transmission}
+The channel transmission has been emulated by adding an error vector $e(X)$ to the encoded vector $c(X)$ and thereby obtaining the received vector $r(X)$. 
+
+\begin{equation}
+r(X) = c(X) + e(X)
+\end{equation} 
+
+
 
 
 \end{document} 
