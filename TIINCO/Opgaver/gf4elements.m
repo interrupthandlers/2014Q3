@@ -1,4 +1,3 @@
-function gf4elements()
 
 gfOne =     gf([1],4),
 a =         gf([2],4),
