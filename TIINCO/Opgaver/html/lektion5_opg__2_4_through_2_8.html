@@ -1,0 +1,682 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Exercise 2.4 (a and b) and 2.6a</title><meta name="generator" content="MATLAB 8.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-03-27"><meta name="DC.source" content="lektion5_opg__2_4_through_2_8.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Exercise 2.4 (a and b) and 2.6a</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">2.4</a></li><li><a href="#12">2.5</a></li><li><a href="#13">2.6</a></li><li><a href="#19">2.7</a></li><li><a href="#25">2.8</a></li></ul></div><h2>2.4<a name="1"></a></h2><p>A binary block code has code vectors in systematic form as given in Table P.2.1.</p><pre class="codeinput">clear; clc;
+</pre><p><img vspace="5" hspace="5" src="pictures/Table.2.1.png" alt=""> </p><p>a) What is the rate of the code?</p><pre class="codeinput">table = [0 0 0 0 0 0; 0 1 1 1 0 0; 1 0 1 0 1 0; 1 1 0 1 1 0; 1 1 0 0 0 1;
+    1 0 1 1 0 1; 0 1 1 0 1 1; 0 0 0 1 1 1];
+
+<span class="comment">% Since the number of code words is 8 (2^3), the dimension of the code</span>
+<span class="comment">% subspace is 3,k = 3. n = 6.</span>
+
+codeRate = 3/6
+</pre><pre class="codeoutput">
+codeRate =
+
+    0.5000
+
+</pre><p>b) Write down the generator and parity check matrices of this code in systematic form.</p><pre class="codeinput"><span class="comment">% Since three vectors include the 3x3 identify matrix as the last 3</span>
+<span class="comment">% elements in the vector, these vectors are used to comprise the generator</span>
+<span class="comment">% matric G.</span>
+
+G = [0 1 1 1 0 0; 1 0 1 0 1 0; 1 1 0 0 0 1]
+
+<span class="comment">% The H matrix is comprised of a kxk identity matrix and the 'P' part of</span>
+<span class="comment">% the G matrix. The 'P' part of the generator matrix is the left hand side</span>
+<span class="comment">% of the matrix when considering the right hand side as the identify</span>
+<span class="comment">% matrix.</span>
+</pre><pre class="codeoutput">
+G =
+
+     0     1     1     1     0     0
+     1     0     1     0     1     0
+     1     1     0     0     0     1
+
+</pre><p><img vspace="5" hspace="5" src="pictures/generatorMatrix.PNG" alt=""> </p><pre class="codeinput">I3 = [1 0 0; 0 1 0; 0 0 1]
+
+P = [0 1 1; 1 0 1; 1 1 0]
+</pre><pre class="codeoutput">
+I3 =
+
+     1     0     0
+     0     1     0
+     0     0     1
+
+
+P =
+
+     0     1     1
+     1     0     1
+     1     1     0
+
+</pre><p><img vspace="5" hspace="5" src="pictures/Hmatrix.PNG" alt=""> </p><pre class="codeinput">H = [I3 P']
+
+HT = H'
+</pre><pre class="codeoutput">
+H =
+
+     1     0     0     0     1     1
+     0     1     0     1     0     1
+     0     0     1     1     1     0
+
+
+HT =
+
+     1     0     0
+     0     1     0
+     0     0     1
+     0     1     1
+     1     0     1
+     1     1     0
+
+</pre><p>c) What is the minimum Hamming distance of the code?</p><pre class="codeinput"><span class="comment">% Since the minimum distance of the codewords is 3:</span>
+
+Dmin = 3
+</pre><pre class="codeoutput">
+Dmin =
+
+     3
+
+</pre><p>d) How many errors can it correct, and how many can it detect?</p><pre class="codeinput">Ecorrect = floor((Dmin-1)/2)
+
+Edetect = Dmin - 1
+</pre><pre class="codeoutput">
+Ecorrect =
+
+     1
+
+
+Edetect =
+
+     2
+
+</pre><p>e) Compute the syndrome vector for the received vector r = (101011) and hence find the location of any error.</p><pre class="codeinput">r = [1 0 1 0 1 1];
+
+<span class="comment">% s = innerProduct(r,HT)</span>
+s = mod(r*HT,2) <span class="comment">% if this fails try typecast to double</span>
+</pre><pre class="codeoutput">
+s =
+
+     1     1     0
+
+</pre><p>Location of the error.</p><pre class="codeinput"><span class="comment">%    Error patterns  Syndromes</span>
+<span class="comment">%    0 0 0 0 0 0     0 0 0</span>
+<span class="comment">%    1 0 0 0 0 0     1 0 0</span>
+<span class="comment">%    0 1 0 0 0 0     0 1 0</span>
+<span class="comment">%    0 0 1 0 0 0     0 0 1</span>
+<span class="comment">%    0 0 0 1 0 0     0 1 1</span>
+<span class="comment">%    0 0 0 0 1 0     1 0 1</span>
+<span class="comment">%    0 0 0 0 0 1     1 1 0</span>
+</pre><p>Given the above correspondance between error patterns and syndrome vectores, the error must be in the sixth position.</p><h2>2.5<a name="12"></a></h2><p>a) Construct a linear block code Cb(5, 2), maximizing its minimum Hamming distance.</p><pre class="codeinput"><span class="comment">% Cb(5,2) means 5 columns and 2 rows. Maximum hamming distance is achieved</span>
+<span class="comment">% by having maximum weight in the parity bits.</span>
+P = [1 1 1; 1 0 1]
+
+<span class="comment">% Generator matrix</span>
+G = [P eye(2)]
+
+<span class="comment">% Parity check matrix</span>
+H = [eye(3) P.']
+</pre><pre class="codeoutput">
+P =
+
+     1     1     1
+     1     0     1
+
+
+G =
+
+     1     1     1     1     0
+     1     0     1     0     1
+
+
+H =
+
+     1     0     0     1     1
+     0     1     0     1     0
+     0     0     1     1     1
+
+</pre><h2>2.6<a name="13"></a></h2><p>A binary linear block code has the following generator matrix in systematic form:</p><p><img vspace="5" hspace="5" src="pictures/P.opg.2.6.PNG" alt=""> </p><p>a) Find the parity check matrix H and hence write down the parity check equations.</p><pre class="codeinput"><span class="comment">% As described above the 'P' matrix is used along with the 3x3 identify</span>
+<span class="comment">% matrix since the vectors have messages of length 10.</span>
+
+G = [1 1 0 1 1 0 0 1 1 0 1 0 0;
+     1 0 1 1 0 1 0 1 0 1 0 1 0;
+     1 1 1 0 0 0 1 1 1 1 0 0 1];
+
+P = [1 1 0 1 1 0 0 1 1 0;
+1 0 1 1 0 1 0 1 0 1;
+1 1 1 0 0 0 1 1 1 1];
+
+I10 = eye(10); <span class="comment">% identity matrix size 10x10</span>
+
+HT = [ I10 P.'];
+</pre><p>Since the resulting matrix cannot fit in the page width, is has been split into a left half and a right half. The left half shows columns 1-7 and the right half shows colums 8-13.</p><pre class="codeinput">HTlefthalf = HT(:,1 : 1 : 7)
+HTrighthalf = HT(:,8 : 1 : end)
+</pre><pre class="codeoutput">
+HTlefthalf =
+
+     1     0     0     0     0     0     0
+     0     1     0     0     0     0     0
+     0     0     1     0     0     0     0
+     0     0     0     1     0     0     0
+     0     0     0     0     1     0     0
+     0     0     0     0     0     1     0
+     0     0     0     0     0     0     1
+     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0
+
+
+HTrighthalf =
+
+     0     0     0     1     1     1
+     0     0     0     1     0     1
+     0     0     0     0     1     1
+     0     0     0     1     1     0
+     0     0     0     1     0     0
+     0     0     0     0     1     0
+     0     0     0     0     0     1
+     1     0     0     1     1     1
+     0     1     0     1     0     1
+     0     0     1     0     1     1
+
+</pre><p>Parity check equations. The codeword bits will be denoted as c0-c9 and message bits m0-m2. The '+' operator used below denotes modulo2 addition.</p><pre class="codeinput"><span class="comment">% c0  = m0  +   m1  +   m2</span>
+<span class="comment">% c1  = m0          +   m2</span>
+<span class="comment">% c2  =         m1  +   m2</span>
+<span class="comment">% c3  = m0  +   m1</span>
+<span class="comment">% c4  = m0</span>
+<span class="comment">% c5  =         m1</span>
+<span class="comment">% c6  =         m2</span>
+<span class="comment">% c7  = m0  +   m1  +   m2</span>
+<span class="comment">% c8  = m0          +   m2</span>
+<span class="comment">% c9  =         m1  +   m2</span>
+</pre><p>b) Find the minimum Hamming distance of the code.</p><pre class="codeinput"><span class="comment">% The minimum distance of the block code is equal to the minimum weight of</span>
+<span class="comment">% the "lightest" codeword. However Matlab has a function that can calculate</span>
+<span class="comment">% the weight from the generator matrix:</span>
+
+HamDis = gfweight(G)
+</pre><pre class="codeoutput">
+HamDis =
+
+     7
+
+</pre><h2>2.7<a name="19"></a></h2><p>The generator matrix of a binary linear block code is given below:</p><p><img vspace="5" hspace="5" src="pictures/p.opg.2.7.PNG" alt=""> </p><p>a) Write down the parity check equations of the code.</p><pre class="codeinput">k = 2;
+n = 8;
+
+P = [1 1 0 0 1 1; 0 0 1 1 1 1];
+
+G = [P eye(k)]
+
+H = [eye(n-k) P']
+</pre><pre class="codeoutput">
+G =
+
+     1     1     0     0     1     1     1     0
+     0     0     1     1     1     1     0     1
+
+
+H =
+
+     1     0     0     0     0     0     1     0
+     0     1     0     0     0     0     1     0
+     0     0     1     0     0     0     0     1
+     0     0     0     1     0     0     0     1
+     0     0     0     0     1     0     1     1
+     0     0     0     0     0     1     1     1
+
+</pre><p>Parity check equations. The codeword bits will be denoted as c0-c5 and message bits m0-m1. The '+' operator used below denotes modulo2 addition.</p><pre class="codeinput"><span class="comment">% c0  = m0</span>
+<span class="comment">% c1  = m0</span>
+<span class="comment">% c2  =         m1</span>
+<span class="comment">% c3  =         m1</span>
+<span class="comment">% c4  = m0  +   m1</span>
+<span class="comment">% c5  = m0  +   m1</span>
+</pre><p>b) Determine the code rate and minimum Hamming distance.</p><pre class="codeinput">codeRate = k/n
+
+HamDis = gfweight(G)
+</pre><pre class="codeoutput">
+codeRate =
+
+    0.2500
+
+
+HamDis =
+
+     5
+
+</pre><p>c) If the error rate at the input of the decoder is 10?3, estimate the error rate at the output of the decoder.</p><pre class="codeinput">p = 10^-3;
+
+t = floor((HamDis-1)/2);
+
+BER = nchoosek(n-1,t)*p^(t+1)
+</pre><pre class="codeoutput">
+BER =
+
+   2.1000e-08
+
+</pre><h2>2.8<a name="25"></a></h2><p>The Hamming block code Cb(15, 11) has the following parity check submatrix:</p><p><img vspace="5" hspace="5" src="pictures/P.opg.2.8.png" alt=""> </p><p>a) Construct the parity check matrix of the code.</p><pre class="codeinput">P = [0 0 1 1;
+    0 1 0 1;
+    1 0 0 1;
+    0 1 1 0;
+    1 0 1 0;
+    1 1 0 0;
+    0 1 1 1;
+    1 1 1 0;
+    1 1 0 1;
+    1 0 1 1;
+    1 1 1 1];
+
+n = 15;
+k = 11;
+
+H = [ eye(n-k) P']
+</pre><pre class="codeoutput">
+H =
+
+  Columns 1 through 13
+
+     1     0     0     0     0     0     1     0     1     1     0     1     1
+     0     1     0     0     0     1     0     1     0     1     1     1     1
+     0     0     1     0     1     0     0     1     1     0     1     1     0
+     0     0     0     1     1     1     1     0     0     0     1     0     1
+
+  Columns 14 through 15
+
+     1     1
+     0     1
+     1     1
+     1     1
+
+</pre><p>b) Construct the error pattern syndrome table.</p><pre class="codeinput">G = [P eye(k)];
+
+HamDis = gfweight(G);
+
+t = floor((HamDis-1)/2)
+</pre><pre class="codeoutput">
+t =
+
+     1
+
+</pre><p>Since t = 1 the error pattern syndrome table looks like:</p><pre class="codeinput">EPST = [eye(n) H']
+</pre><pre class="codeoutput">
+EPST =
+
+  Columns 1 through 13
+
+     1     0     0     0     0     0     0     0     0     0     0     0     0
+     0     1     0     0     0     0     0     0     0     0     0     0     0
+     0     0     1     0     0     0     0     0     0     0     0     0     0
+     0     0     0     1     0     0     0     0     0     0     0     0     0
+     0     0     0     0     1     0     0     0     0     0     0     0     0
+     0     0     0     0     0     1     0     0     0     0     0     0     0
+     0     0     0     0     0     0     1     0     0     0     0     0     0
+     0     0     0     0     0     0     0     1     0     0     0     0     0
+     0     0     0     0     0     0     0     0     1     0     0     0     0
+     0     0     0     0     0     0     0     0     0     1     0     0     0
+     0     0     0     0     0     0     0     0     0     0     1     0     0
+     0     0     0     0     0     0     0     0     0     0     0     1     0
+     0     0     0     0     0     0     0     0     0     0     0     0     1
+     0     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0     0
+
+  Columns 14 through 19
+
+     0     0     1     0     0     0
+     0     0     0     1     0     0
+     0     0     0     0     1     0
+     0     0     0     0     0     1
+     0     0     0     0     1     1
+     0     0     0     1     0     1
+     0     0     1     0     0     1
+     0     0     0     1     1     0
+     0     0     1     0     1     0
+     0     0     1     1     0     0
+     0     0     0     1     1     1
+     0     0     1     1     1     0
+     0     0     1     1     0     1
+     1     0     1     0     1     1
+     0     1     1     1     1     1
+
+</pre><p>c) Apply syndrome decoding to the received vector r = (011111001011011).</p><pre class="codeinput">r = [0 1 1 1 1 1 0 0 1 0 1 1 0 1 1];
+
+s = mod(r*H',2) <span class="comment">% if this fails try typecast to double</span>
+</pre><pre class="codeoutput">
+s =
+
+     0     1     1     0
+
+</pre><p>Given a syndrome vector of 0 1 1 0, the error is located at the eigth bit.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Exercise 2.4 (a and b) and 2.6a
+%% 2.4
+% A binary block code has code vectors in systematic form as given in Table P.2.1.
+clear; clc;
+%%
+%
+% <<pictures/Table.2.1.png>>
+%
+
+%%
+% a)
+% What is the rate of the code?
+
+table = [0 0 0 0 0 0; 0 1 1 1 0 0; 1 0 1 0 1 0; 1 1 0 1 1 0; 1 1 0 0 0 1; 
+    1 0 1 1 0 1; 0 1 1 0 1 1; 0 0 0 1 1 1];
+
+% Since the number of code words is 8 (2^3), the dimension of the code 
+% subspace is 3,k = 3. n = 6.
+
+codeRate = 3/6
+%%
+% b)
+% Write down the generator and parity check matrices of this code in systematic
+% form. 
+
+% Since three vectors include the 3x3 identify matrix as the last 3
+% elements in the vector, these vectors are used to comprise the generator
+% matric G.
+
+G = [0 1 1 1 0 0; 1 0 1 0 1 0; 1 1 0 0 0 1]
+
+% The H matrix is comprised of a kxk identity matrix and the 'P' part of
+% the G matrix. The 'P' part of the generator matrix is the left hand side
+% of the matrix when considering the right hand side as the identify
+% matrix.
+
+%%
+% 
+% <<pictures/generatorMatrix.PNG>>
+% 
+
+
+I3 = [1 0 0; 0 1 0; 0 0 1]
+
+P = [0 1 1; 1 0 1; 1 1 0]
+
+%%
+% 
+% <<pictures/Hmatrix.PNG>>
+% 
+
+H = [I3 P']
+
+HT = H'
+
+%%
+% c) 
+% What is the minimum Hamming distance of the code?
+
+% Since the minimum distance of the codewords is 3:
+
+Dmin = 3
+
+%%
+% d)
+% How many errors can it correct, and how many can it detect?
+
+Ecorrect = floor((Dmin-1)/2)
+
+Edetect = Dmin - 1
+
+%% 
+% e)
+% Compute the syndrome vector for the received vector r = (101011) and
+% hence find the location of any error.
+
+r = [1 0 1 0 1 1];
+
+% s = innerProduct(r,HT)
+s = mod(r*HT,2) % if this fails try typecast to double
+
+%% 
+% Location of the error. 
+
+%    Error patterns  Syndromes
+%    0 0 0 0 0 0     0 0 0
+%    1 0 0 0 0 0     1 0 0
+%    0 1 0 0 0 0     0 1 0
+%    0 0 1 0 0 0     0 0 1
+%    0 0 0 1 0 0     0 1 1
+%    0 0 0 0 1 0     1 0 1
+%    0 0 0 0 0 1     1 1 0
+%%
+% Given the above correspondance between error patterns and syndrome
+% vectores, the error must be in the sixth position.
+
+%% 2.5
+% a) Construct a linear block code Cb(5, 2), maximizing its minimum Hamming
+% distance.
+
+% Cb(5,2) means 5 columns and 2 rows. Maximum hamming distance is achieved
+% by having maximum weight in the parity bits.
+P = [1 1 1; 1 0 1]
+
+% Generator matrix
+G = [P eye(2)]
+
+% Parity check matrix
+H = [eye(3) P.']
+
+%% 2.6
+% A binary linear block code has the following generator matrix in systematic form:
+
+%%
+% 
+% <<pictures/P.opg.2.6.PNG>>
+% 
+
+%%
+% a)
+% Find the parity check matrix H and hence write down the parity check equations.
+
+% As described above the 'P' matrix is used along with the 3x3 identify
+% matrix since the vectors have messages of length 10.
+
+G = [1 1 0 1 1 0 0 1 1 0 1 0 0;
+     1 0 1 1 0 1 0 1 0 1 0 1 0;
+     1 1 1 0 0 0 1 1 1 1 0 0 1];
+
+P = [1 1 0 1 1 0 0 1 1 0;
+1 0 1 1 0 1 0 1 0 1;
+1 1 1 0 0 0 1 1 1 1];
+
+I10 = eye(10); % identity matrix size 10x10
+    
+HT = [ I10 P.'];
+%%
+% Since the resulting matrix cannot fit in the page width, is has been
+% split into a left half and a right half. The left half shows columns 1-7 
+% and the right half shows colums 8-13.
+
+HTlefthalf = HT(:,1 : 1 : 7)
+HTrighthalf = HT(:,8 : 1 : end)
+
+%%
+% Parity check equations. The codeword bits will be denoted as c0-c9 and 
+% message bits m0-m2. The '+' operator used below denotes modulo2 addition.
+
+% c0  = m0  +   m1  +   m2
+% c1  = m0          +   m2
+% c2  =         m1  +   m2
+% c3  = m0  +   m1
+% c4  = m0
+% c5  =         m1
+% c6  =         m2
+% c7  = m0  +   m1  +   m2
+% c8  = m0          +   m2
+% c9  =         m1  +   m2
+
+%%
+% b) 
+% Find the minimum Hamming distance of the code.
+
+% The minimum distance of the block code is equal to the minimum weight of
+% the "lightest" codeword. However Matlab has a function that can calculate
+% the weight from the generator matrix:
+
+HamDis = gfweight(G)
+
+%% 2.7
+% The generator matrix of a binary linear block code is given below:
+
+%%
+% 
+% <<pictures/p.opg.2.7.PNG>>
+% 
+
+%%
+% a) Write down the parity check equations of the code.
+
+k = 2;
+n = 8;
+
+P = [1 1 0 0 1 1; 0 0 1 1 1 1];
+
+G = [P eye(k)]
+
+H = [eye(n-k) P']
+
+%%
+% Parity check equations. The codeword bits will be denoted as c0-c5 and 
+% message bits m0-m1. The '+' operator used below denotes modulo2 addition.
+
+% c0  = m0  
+% c1  = m0  
+% c2  =         m1
+% c3  =         m1
+% c4  = m0  +   m1
+% c5  = m0  +   m1
+
+%%
+% b) Determine the code rate and minimum Hamming distance.
+
+codeRate = k/n
+
+HamDis = gfweight(G)
+
+%%
+% c) If the error rate at the input of the decoder is 10?3, estimate the 
+% error rate at the output of the decoder.
+
+p = 10^-3;
+
+t = floor((HamDis-1)/2);
+
+BER = nchoosek(n-1,t)*p^(t+1)
+
+%% 2.8
+% The Hamming block code Cb(15, 11) has the following parity check submatrix:
+
+%%
+% 
+% <<pictures/P.opg.2.8.png>>
+% 
+
+%%
+% a) Construct the parity check matrix of the code.
+
+P = [0 0 1 1;
+    0 1 0 1;
+    1 0 0 1;
+    0 1 1 0;
+    1 0 1 0;
+    1 1 0 0;
+    0 1 1 1;
+    1 1 1 0;
+    1 1 0 1;
+    1 0 1 1;
+    1 1 1 1];
+
+n = 15;
+k = 11;
+
+H = [ eye(n-k) P']
+
+%%
+% b) Construct the error pattern syndrome table.
+
+G = [P eye(k)];
+
+HamDis = gfweight(G);
+
+t = floor((HamDis-1)/2)
+
+%%
+% Since t = 1 the error pattern syndrome table looks like:
+
+EPST = [eye(n) H']
+
+
+%%
+% c) Apply syndrome decoding to the received vector r = (011111001011011).
+
+r = [0 1 1 1 1 1 0 0 1 0 1 1 0 1 1];
+
+s = mod(r*H',2) % if this fails try typecast to double
+
+%%
+% Given a syndrome vector of 0 1 1 0, the error is located at the eigth
+% bit.
+##### SOURCE END #####
+--></body></html>

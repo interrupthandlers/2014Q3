@@ -49,7 +49,9 @@ P = [0 1 1; 1 0 1; 1 1 0]
 % <<pictures/Hmatrix.PNG>>
 % 
 
-HT = [I3; P.']
+H = [I3 P']
+
+HT = H'
 
 %%
 % c) 
